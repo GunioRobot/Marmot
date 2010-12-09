@@ -1,0 +1,10 @@
+<h1><%= artist.name %></h1>
+<img src="<%= artist.artist_images[0].image_url %>" />
+
+<ul>
+	<% for(var i=0; i < songs.length; i++) { %>
+		<% var record = songs[i] %>
+		<li><%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %></li>
+	<% } %>
+</ul>
+

@@ -1,0 +1,42 @@
+#header {
+	background-color: #000;
+	color: #fff;
+}
+
+h1 {
+	font-size: 23px;
+}
+
+#header {
+	margin-bottom: 5px;
+}
+
+	#header h1 {
+		padding: 4px;
+	}
+
+	#header a {
+		color: #0085FF;
+		text-decoration: none;
+	}
+
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#artist_list {
+	float: left;
+	width: 200px;
+}
+
+#artist_list ul {
+	list-style-type: none;
+}
+
+#artist_info {
+	text-align: left;
+	float: right;  
+	width: 760px;
+}
