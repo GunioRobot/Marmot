@@ -25,7 +25,7 @@ Ruby and a slew of gems are required for the parser, but as stated above the par
 
 ## Things of interest
 
-Probably the most fascinating file to look at is the boot.js file.
+Probably the most fascinating file to look at is the [boot.js](https://github.com/antrover/Marmot/blob/master/boot.js) file.
 
 ## Why am I building Marmot?
 
