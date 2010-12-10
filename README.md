@@ -1,6 +1,6 @@
 # Marmot
 
-Marmot is a simple app that allows you to import your mp3s into couchdb and serve them up using node.
+Marmot is a simple app that allows you to import your mp3s into couchdb and serve them up using Node using the Express framework.
 
 ## Things not included in this project (yet)
 
@@ -11,7 +11,21 @@ Marmot is a simple app that allows you to import your mp3s into couchdb and serv
 * Streaming of mp3s
 * User auth
 * A useable interface (as well as a mobile one)
-* More to come...
+* More to come...     
+
+## Requirements
+
+* npm
+* underscore.js
+* node.js
+* couch-client
+* couchdb
+
+Ruby and a slew of gems are required for the parser, but as stated above the parser isn't yet in this project. (Currently lives in a different project). 
+
+## Things of interest
+
+Probably the most fascinating file to look at is the boot.js file.
 
 ## Why am I building Marmot?
 
