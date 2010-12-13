@@ -59,3 +59,7 @@ h1 {
 .artist_tracks {
 	margin-top: 20px;
 }
+
+.current_track_playing {
+	background-color: #ccc;
+}

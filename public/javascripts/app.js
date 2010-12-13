@@ -43,19 +43,32 @@ app.ajax.Link = function(click_id, element_id){
 
 app.player.Play = function(){
   var audio_element = $('#player')[0];
+  var current_playing_track_class = 'current_track_playing';
   var current_track;
   
   // an anonymous playSong method that takes an element. 
   // Also sets the current_track var to the element
   function playSong(element) { 
-    current_track = $(element);
-    audio_element.src = $(element).attr('href'); 
+    current_track = $(element); 
+    highlightCurrentTrack(element);
+    audio_element.src = current_track.attr('href'); 
     audio_element.autoplay = true;
     audio_element.preload = 'auto';
+  };
+                 
+  // Removes the current_track_playing class 
+  function removeCurrentTrackClass(){
+    $('.play_song').removeClass(current_playing_track_class);
+  };
+  
+  // Highlights the currently playing track
+  function highlightCurrentTrack(element){
+    $(element).addClass(current_playing_track_class);
   };
   
   // Attach the click event to each .play_song attribute (i.e a track);
   $('.play_song').live('click', function(event){
+     removeCurrentTrackClass();
     event.preventDefault();    
     playSong(this);
   }); 
@@ -63,10 +76,16 @@ app.player.Play = function(){
   // 'seeked' callback
   audio_element.addEventListener('seeked',function(){
     audio_element.play();
+  });  
+  
+  // 'timeupdate' callback. Holds the current time of the track
+  audio_element.addEventListener('timeupdate', function(){
+    // "this.currentTime" holds the current time of the track
   });
   
   // 'ended' callback
   audio_element.addEventListener("ended", function(){
+    removeCurrentTrackClass();
     var track_number = parseInt($(current_track).attr('rel'),10);
     var next_track = track_number + 1;       
     var next_track_element = $('.play_song[rel=' + next_track + ']');
