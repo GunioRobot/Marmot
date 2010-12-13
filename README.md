@@ -8,7 +8,6 @@ Marmot is a simple app that allows you to import your mp3s into couchdb and serv
 
 ## Things not done 
 
-* Streaming of mp3s
 * User auth
 * A useable interface (as well as a mobile one)
 * More to come...     
