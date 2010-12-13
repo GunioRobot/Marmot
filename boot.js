@@ -82,8 +82,21 @@
 
   };
 
+// Play resource, and object to be passed into app.resource()
+  var Play = {
+    
+    // GET => /play/:song_slug
+    show: function(req, res){
+      Songs.get(req.params.id, function(err, doc){
+        res.sendfile(doc.file_path);
+      });
+    }
+    
+  };
+
 // Resources
-  app.resource("/artists", Artist);
+  app.resource("/artists", Artist);  
+  app.resource("/play", Play);
 
 // Root url that redirects to /artists
   app.get('/', function(req, res){

@@ -9,15 +9,21 @@ h1 {
 
 #header {
 	margin-bottom: 5px;
+	height: 32px;
 }
 
 	#header h1 {
 		padding: 4px;
+		float: left;
 	}
 
 	#header a {
 		color: #0085FF;
 		text-decoration: none;
+	}
+	
+	#header audio {
+		float: right;
 	}
 
 
@@ -38,7 +44,12 @@ h1 {
 #artist_info {
 	float: right;  
 	width: 760px;
-}  
+}   
+
+.artist_header {
+	float: left;
+	width: 100%;
+}
 
 .artist_header ul li {
 	float: left;
@@ -47,5 +58,4 @@ h1 {
 
 .artist_tracks {
 	margin-top: 20px;
-	clear: both;
 }
