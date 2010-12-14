@@ -1,8 +1,9 @@
 <div id='artist_list'>
 	<ul>   	
 		<% for(var i=0; i < songs.length; i++) { %>
-			<li>
-				<a href="/artists#<%= escape(songs[i].key) %>" rel="/artists/<%= escape(songs[i].key) %>" class='ajax_link' ><%= songs[i].value %></a>
+			<li>                       
+
+				<a href="<%= artistLink(songs[i])%>" rel="/artists/<%= escape(songs[i].key) %>" class='ajax_link' ><%= songs[i].value %></a>
 			</li>
 		<% } %>
 	</ul>

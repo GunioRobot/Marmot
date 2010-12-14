@@ -58,7 +58,6 @@
   
     // GET => /artists/:id
     show: function(req, res){ 
-      // artist_development/_design/Artist/_view/by_albums
       Songs.view('/artist_development/_design/Artist/_view/by_albums', {key: req.params.id, include_docs: true, limit:1}, function(err, doc) {
         var artist = doc.rows[0].doc;
         var songs = [];
@@ -107,7 +106,11 @@
   app.helpers({
     
     // Returns the square thumbnail image for an album. Pass in an Artist couchdb object
-    squareAlbumImage: function(artist){ return artist.artist_images[2].image_url;}
+    squareAlbumImage: function(artist){ return artist.artist_images[2].image_url;},
+    
+    // link helpers
+    artistLink: function(song){ return ("/artists#"+escape(song.key));}
+    
     
   });
 
