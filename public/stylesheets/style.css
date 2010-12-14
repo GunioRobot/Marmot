@@ -9,24 +9,20 @@ h1 {
 
 #header {
 	margin-bottom: 5px;
-	height: 32px;
+	height: 46px;
 }
 
-	#header h1 {
-		padding: 4px;
+	#header #player{
 		float: left;
-	}
-
-	#header a {
-		color: #0085FF;
-		text-decoration: none;
+		width: 100%;
 	}
 	
-	#header audio {
-		float: right;
+	#header #subheader {
+		padding-top: 3px;
+		clear:both;
 	}
-
-
+	
+	
 #container {
 	width: 960px;
 	margin: 0 auto;

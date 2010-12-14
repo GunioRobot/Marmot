@@ -51,6 +51,7 @@ app.player.Play = function(){
   function playSong(element) { 
     current_track = $(element); 
     highlightCurrentTrack(element);
+    displayWhosPlaying(element);
     audio_element.src = current_track.attr('href'); 
     audio_element.autoplay = true;
     audio_element.preload = 'auto';
@@ -64,6 +65,19 @@ app.player.Play = function(){
   // Highlights the currently playing track
   function highlightCurrentTrack(element){
     $(element).addClass(current_playing_track_class);
+  };
+  
+  // Displays the current track playing
+  function displayWhosPlaying(element){
+    var artist = $(element).attr('data-artist');
+    var album = $(element).attr('data-album');
+    var song = $(element).attr('data-song');
+    $('#now_playing').html(artist + " / " + album + " / " + song);
+  };
+  
+  // Clears the who's playing dom element
+  function clearWhosPlaying(){
+    $('#now_playing').html();
   };
   
   // Attach the click event to each .play_song attribute (i.e a track);
@@ -81,6 +95,11 @@ app.player.Play = function(){
   // 'timeupdate' callback. Holds the current time of the track
   audio_element.addEventListener('timeupdate', function(){
     // "this.currentTime" holds the current time of the track
+  });
+  
+  // 'stop' callback. Fires when the track stopped playing
+  audio_element.addEventListener('stop', function(){
+    clearWhosPlaying();
   });
   
   // 'ended' callback

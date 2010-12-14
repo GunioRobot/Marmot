@@ -1,6 +1,6 @@
 <div class='artist_header'>
 	<ul>
-		<li><img src="<%= artist.artist_images[2].image_url %>" /></li>
+		<li><img src="<%= squareAlbumImage(artist) %>" /></li>
 		<li>
 			<h1><%= artist.name %></h1>
 		</li>
@@ -12,8 +12,8 @@
 	<ul class='playlist'>
 		<% for(var i=0; i < songs.length; i++) { %>
 			<% var record = songs[i] %>
-			<li>
-				<a rel=<%= i %> href='/play/<%= record.song.slug %>' class='play_song'><%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %></a>
+			<li>                   
+				<a rel=<%= i %> href='/play/<%= record.song.slug %>' class='play_song' data-artist='<%= artist.name %>' data-album='<%= record.album.name %>' data-song='<%= record.song.name %>'><%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %></a>
 			</li>
 		<% } %>
 	</ul>

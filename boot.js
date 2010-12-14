@@ -103,5 +103,13 @@
     res.redirect('/artists');
   });
 
+// App helpers
+  app.helpers({
+    
+    // Returns the square thumbnail image for an album. Pass in an Artist couchdb object
+    squareAlbumImage: function(artist){ return artist.artist_images[2].image_url;}
+    
+  });
+
 
 app.listen(8080);
