@@ -17,7 +17,7 @@ app.player = {};
     element_id = The element that received the data after the ajax call
 */
 app.ajax.Link = function(click_id, element_id){
-  $(click_id).click(function(event){   
+  $(click_id).live('click', function(event){   
     event.preventDefault();
     $(element_id).empty();
     var url = $(this).attr('rel');
@@ -72,7 +72,8 @@ app.player.Play = function(){
     var artist = $(element).attr('data-artist');
     var album = $(element).attr('data-album');
     var song = $(element).attr('data-song');
-    $('#now_playing').html(artist + " / " + album + " / " + song);
+    var href = $(element).attr('data-artisturl');
+    $('#now_playing').html("<a href='" + href + "' class='ajax_link' rel='"+ href +"'>" + artist + " / " + album + " / " + song + "</a>");
   };
   
   // Clears the who's playing dom element
@@ -90,7 +91,11 @@ app.player.Play = function(){
   // 'seeked' callback
   audio_element.addEventListener('seeked',function(){
     audio_element.play();
-  });  
+  });   
+  
+  audio_element.addEventListener('play', function(){
+    audio_element.play();
+  });
   
   // 'timeupdate' callback. Holds the current time of the track
   audio_element.addEventListener('timeupdate', function(){
@@ -98,8 +103,12 @@ app.player.Play = function(){
   });
   
   // 'stop' callback. Fires when the track stopped playing
-  audio_element.addEventListener('stop', function(){
+  audio_element.addEventListener('pause', function(){
     clearWhosPlaying();
+  });   
+  
+  audio_element.addEventListener('progress', function(){ 
+
   });
   
   // 'ended' callback

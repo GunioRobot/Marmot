@@ -13,7 +13,7 @@
 		<% for(var i=0; i < songs.length; i++) { %>
 			<% var record = songs[i] %>
 			<li>                   
-				<a rel=<%= i %> href='/play/<%= record.song.slug %>' class='play_song' data-artist='<%= artist.name %>' data-album='<%= record.album.name %>' data-song='<%= record.song.name %>'><%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %></a>
+				<a rel=<%= i %> href='/play/<%= record.song.slug %>' class='play_song' data-artisturl='/artists/<%= artist.slug %>' data-artist='<%= artist.name %>' data-album='<%= record.album.name %>' data-song='<%= record.song.name %>'><%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %></a>
 			</li>
 		<% } %>
 	</ul>
