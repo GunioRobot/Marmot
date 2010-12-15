@@ -58,8 +58,9 @@
   
     // GET => /artists/:id
     show: function(req, res){ 
-      Songs.view('/artist_development/_design/Artist/_view/by_albums', {key: req.params.id, include_docs: true, limit:1}, function(err, doc) {
-        var artist = doc.rows[0].doc;
+      // TODO - Fix this view because I accidently deleted the couchdb function... in couch... when I deleted the DB. #fail
+      Songs.view('/artist_development/'+req.params.id, {}, function(err, doc) {
+        var artist = doc;
         var songs = [];
         var sorted_albums = _.sortBy(artist.albums, function(album){ return album.name;});
         for(var i=0; i < sorted_albums.length; i++){
@@ -83,11 +84,12 @@
 
 // Play resource, and object to be passed into app.resource()
   var Play = {
-    
+        
     // GET => /play/:song_slug
     show: function(req, res){
-      Songs.get(req.params.id, function(err, doc){
-        res.sendfile(doc.file_path);
+      Songs.view('/artist_development/'+req.params.id, {}, function(err, doc){
+        var song = doc;
+        res.sendfile(song.file_path);
       });
     }
     

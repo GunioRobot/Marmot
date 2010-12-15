@@ -83,7 +83,7 @@ app.player.Play = function(){
   
   // Attach the click event to each .play_song attribute (i.e a track);
   $('.play_song').live('click', function(event){
-     removeCurrentTrackClass();
+    removeCurrentTrackClass();
     event.preventDefault();    
     playSong(this);
   }); 
