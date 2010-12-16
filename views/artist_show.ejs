@@ -1,16 +1,13 @@
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		app.ajax.VideoForArtist('<%= artist.name %>');
-	})
-</script>
-
 <div class='artist_header'>
 	<ul>
 		<li><img src="<%= squareAlbumImage(artist) %>" /></li>
 		<li>
 			<h1><%= artist.name %></h1>
-			<ul id='artist_videos'></ul>
 		</li> 
+		<li>
+			<ul id='artist_videos'>
+			</ul>
+		</li>
 	</ul>
 </div>
  
@@ -33,3 +30,9 @@
 		<% } %>
 	</ul>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		app.ajax.VideoForArtist('<%= artist.name %>');
+	})
+</script>

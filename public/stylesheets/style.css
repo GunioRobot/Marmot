@@ -67,6 +67,7 @@ h1 {
 	background-color: #ccc;
 }
 
-#artist_videos li{
-float:left;
+#artist_videos {
+	float:left;
+	white-space:nowrap;
 }
