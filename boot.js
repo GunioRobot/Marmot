@@ -11,9 +11,16 @@
   var sys = require("sys");   
   var connect = require('connect');
   var _ = require('underscore');
+  var xml = require('./lib/node-xml');
+  var http = require('http');
+  var fs = require('fs');
   var CouchClient = require('couch-client');
   var Songs = CouchClient("http://localhost:5984/artist_development");
-
+  
+  // Load config file. Once eval'd, the YOUTUBE object is available
+  // Currently handles YOUTUBE.client_key and YOUTUBE.dev_key
+  eval(fs.readFileSync('config.js').toString());
+  
   // Create the Express app.
   var app = express.createServer();
 
@@ -27,8 +34,7 @@
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     app.set('views');
     app.set('view engine','ejs');      
-  });
-
+  });         
                     
 // Resource function
   app.resource = function(path, obj) {
@@ -79,8 +85,10 @@
         
       });   
     }
+    
 
   };
+  
 
 // Play resource, and object to be passed into app.resource()
   var Play = {
@@ -103,6 +111,66 @@
   app.get('/', function(req, res){
     res.redirect('/artists');
   });
+           
+// GET - Returns videos from Youtube for a given artist (:id). Pass in the regular artist name so there's no reason to connect to couch based off the artist slug to get the real name. 
+  app.get('/videos/:id', function(req,res){  
+    var artist_name = escape(req.params.id);
+    var connection = http.createClient(80, "gdata.youtube.com");
+    var url = "/feeds/api/videos?v=2&alt=jsonc&q="+artist_name+"&category=Music&format=5&orderby=relevance&safesearch=none"; 
+    var request = connection.request('GET', url, {
+          "host": "gdata.youtube.com", 
+          "X-GData-Client": YOUTUBE.client_key,
+          "X-GData-Key": "key="+YOUTUBE.dev_key
+        });   
+
+    request.end();
+    request.on('response', function (response) {
+      response.setEncoding('utf8');  
+
+      var bodyData = "";
+      response.on('data', function (chunk) {
+        bodyData += chunk;
+      });
+
+      response.on('end', function(data){
+        videos = extractVideos(bodyData);
+        res.render('videos', {
+           locals: {videos: videos},
+           layout: false
+        });
+      });
+
+    });
+  });
+  
+  // Extracts videos based off the json_chunk.
+  // Returns a hash with the following structure:
+  /*
+    {title: "The video title",
+     thumbnail: "http://someurl.com/to/an/image.jpg",
+     url: "http://theurl.com/to/youtubes/video/page"}
+  */
+  var extractVideos = function(json_chunk){
+    var videos = [];
+    var json = JSON.parse(json_chunk);
+    for (var i=0; i < json.data.items.length; i++) {
+      try{
+        var item = json.data.items[i];
+        if(item.title && item.title && item.thumbnail.sqDefault){
+          videos.push({
+            title: item.title,
+            thumbnail: item.thumbnail.sqDefault,
+            url: item.player['default']  // .default was throwing JSlint errors so I opted for this syntax ['default']
+          });
+        }
+      }catch(err){
+        console.log("Error parsing youtube JSON");
+        console.log(err);
+        console.log("----------------------");
+      };
+    };
+    return videos;
+  };
 
 // App helpers
   app.helpers({
@@ -112,8 +180,6 @@
     
     // link helpers
     artistLink: function(song){ return ("/artists#"+escape(song.key));}
-    
-    
   });
 
 

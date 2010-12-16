@@ -1,0 +1,4 @@
+var YOUTUBE = {
+  client_key: "ytapi-NAME-PROJECT-dlno96g0-0", 
+  dev_key: "Bs2sdsd023ofsdfds...."
+};

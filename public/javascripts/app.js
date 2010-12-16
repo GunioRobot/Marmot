@@ -31,7 +31,21 @@ app.ajax.Link = function(click_id, element_id){
       }
     });
   }); 
-};   
+}; 
+
+app.ajax.VideoForArtist = function(artist_name){ 
+  $.ajax({
+    url: '/videos/'+artist_name,
+    type: 'GET',
+    success: function(data) {
+      $('#artist_videos').html(data);
+    },
+    error: function(error) {
+      console.log("Error getting artist videos");
+      console.log(error);
+    }
+  });
+};  
 
                    
 /* All the functions for playing a track are in here. 
@@ -133,5 +147,5 @@ $(document).ready(function() {
   app.ajax.Link('.ajax_link', '#artist_info');
   
   // Sets up the player on the artist's page
-  app.player.Play();
+  app.player.Play();  
 });
