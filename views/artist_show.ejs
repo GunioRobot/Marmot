@@ -1,14 +1,11 @@
 <div class='artist_header'>
-	<ul>
-		<li><img src="<%= squareAlbumImage(artist) %>" /></li>
-		<li>
-			<h1><%= artist.name %></h1>
-		</li> 
-		<li>
-			<ul id='artist_videos'>
-			</ul>
-		</li>
-	</ul>
+	<div class='artist_image'>
+		<img src="<%= squareAlbumImage(artist) %>" />
+	</div>
+	<div class='artist_meta'>
+		<h1><%= artist.name %></h1>
+		<ul id='artist_videos'></ul>
+	</div>
 </div>
  
 <div class='artist_tracks'>
@@ -31,8 +28,3 @@
 	</ul>
 </div>
 
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		app.ajax.VideoForArtist('<%= artist.name %>');
-	})
-</script>

@@ -3,7 +3,7 @@
 		<% for(var i=0; i < songs.length; i++) { %>
 			<li>                       
 
-				<a href="<%= artistLink(songs[i])%>" rel="/artists/<%= escape(songs[i].key) %>" class='ajax_link' ><%= songs[i].value %></a>
+				<a data-artistname="<%= songs[i].value %>" href="<%= artistLink(songs[i])%>" rel="/artists/<%= escape(songs[i].key) %>" class='ajax_link' ><%= songs[i].value %></a>
 			</li>
 		<% } %>
 	</ul>

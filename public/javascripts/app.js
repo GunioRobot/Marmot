@@ -20,11 +20,13 @@ app.ajax.Link = function(click_id, element_id){
   $(click_id).live('click', function(event){   
     event.preventDefault();
     $(element_id).empty();
+    var artist_name = $(this).attr("data-artistname");
     var url = $(this).attr('rel');
     $.ajax({
       url: url,
       success: function(data) {
         $(element_id).html(data);
+        app.ajax.VideoForArtist(artist_name);
       },
       error: function(data) {
         $(element_id).html(data);
@@ -38,7 +40,7 @@ app.ajax.VideoForArtist = function(artist_name){
     url: '/videos/'+artist_name,
     type: 'GET',
     success: function(data) {
-      $('#artist_videos').html(data);
+      $('#artist_videos').html(data); 
     },
     error: function(error) {
       console.log("Error getting artist videos");
@@ -87,12 +89,12 @@ app.player.Play = function(){
     var album = $(element).attr('data-album');
     var song = $(element).attr('data-song');
     var href = $(element).attr('data-artisturl');
-    $('#now_playing').html("<a href='" + href + "' class='ajax_link' rel='"+ href +"'>" + artist + " / " + album + " / " + song + "</a>");
+    $('#now_playing').html("<a data-artistname='"+artist+"' href='" + href + "' class='ajax_link' rel='"+ href +"'>" + artist + " / " + album + " / " + song + "</a>");
   };
   
   // Clears the who's playing dom element
   function clearWhosPlaying(){
-    $('#now_playing').html();
+    $('#now_playing').empty();
   };
   
   // Attach the click event to each .play_song attribute (i.e a track);
@@ -136,7 +138,8 @@ app.player.Play = function(){
     if($(next_track_element).length == 1){
       playSong(next_track_element);
     }else{
-      // if we don't have another track to play, figure out what to do. 
+      // Go back to track one if at the end.
+      playSong($('.play_song[rel=0]'));
     }
   });
        
@@ -147,5 +150,5 @@ $(document).ready(function() {
   app.ajax.Link('.ajax_link', '#artist_info');
   
   // Sets up the player on the artist's page
-  app.player.Play();  
+  app.player.Play(); 
 });

@@ -52,22 +52,39 @@ h1 {
 .artist_header {
 	float: left;
 	width: 100%;
-}
+} 
 
-.artist_header ul li {
-	float: left;
-	margin-right: 20px;
-}
+	.artist_image{
+		float:left;
+		width: 130px;
+		clear: none;
+	}
+	
+	.artist_meta {
+		float: left;
+	}
+	
+	#artist_videos {
+		height: 120px;
+		width: 630px; 
+		overflow-x: scroll;
+		white-space: nowrap;
+	}
+	
+	#artist_videos li{
+		display:inline;
+		margin-left: 5px;
+	}
+	
 
 .artist_tracks {
-	margin-top: 20px;
+	float: left;
+	clear: both;
+	margin-top: 50px;
 }
 
 .current_track_playing {
 	background-color: #ccc;
 }
 
-#artist_videos {
-	float:left;
-	white-space:nowrap;
-}
+
