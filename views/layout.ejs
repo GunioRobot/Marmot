@@ -2,29 +2,23 @@
 
 <html>
 	<head>
-		<title>Song listing</title>
-			
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/javascripts/app.js" type="text/javascript" charset="utf-8"></script>
-			
+		<title>Song listing</title>			
 		<link href="/stylesheets/reset.css" rel="stylesheet" type="text/css" />
 		<link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
-	  
 		<div id="container">  
-		
 			<div id='header'>
 				<audio controls="controls" id='player'></audio>
 				<div id='subheader'>
 					<span id='now_playing'></span>
 				</div>
-			</div>
-		
+			</div>		
 			<%- body %>
-						
 	  </div>  
-		
-	
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/javascripts/sammy.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/javascripts/main.js" type="text/javascript" charset="utf-8"></script> 
+		<script src="/javascripts/player.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

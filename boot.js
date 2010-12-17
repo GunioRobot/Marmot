@@ -8,7 +8,6 @@
 
 // Load config file. Once eval'd, the YOUTUBE object is available
 // Currently handles YOUTUBE.client_key and YOUTUBE.dev_key
-
 var fs = require('fs');
 eval(fs.readFileSync('config.js').toString());
 
@@ -17,12 +16,17 @@ eval(fs.readFileSync('config.js').toString());
   var express = require('express'); 
   var sys = require("sys");   
   var connect = require('connect');
+  
   var _ = require('underscore');
   var CouchClient = require('couch-client');
+  
   var Songs = CouchClient("http://localhost:5984/artist_development");
+  var Users = CouchClient("http://localhost:5984/artist_users");
+  
   var YouTube = require('./lib/youtube');
   var youtube = YouTube(YOUTUBE.client_key, YOUTUBE.dev_key);
   
+  var Authentication = require('./lib/authentication');
   
   // Create the Express app.
   var app = express.createServer();
@@ -35,9 +39,15 @@ eval(fs.readFileSync('config.js').toString());
     app.use(app.router);
     app.use(express.staticProvider(__dirname + '/public'));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    
+    app.use(express.cookieDecoder());
+    app.use(express.session());
+        
     app.set('views');
     app.set('view engine','ejs');      
-  });         
+        
+  });  
+  
                     
 // Resource function
   app.resource = function(path, obj) {
@@ -104,11 +114,12 @@ eval(fs.readFileSync('config.js').toString());
       });
     }
     
-  };
-
+  };    
+  
 // Resources
   app.resource("/artists", Artist);  
-  app.resource("/play", Play);
+  app.resource("/play", Play);  
+
 
 // Root url that redirects to /artists
   app.get('/', function(req, res){
@@ -116,15 +127,25 @@ eval(fs.readFileSync('config.js').toString());
   });
            
 // GET - Returns videos from Youtube for a given artist (:id). Pass in the regular artist name so there's no reason to connect to couch based off the artist slug to get the real name. 
-  app.get('/videos/:id', function(req,res){  
-    youtube.searchForVideo(escape(req.params.id), function(videos){
-      res.render('videos', {
-         locals: {videos: videos},
-         layout: false
-      });      
-    });
+  app.get('/videos/:id', function(req,res){
+    Songs.view('/artist_development/_design/Artist/_view/by_slug', {key: req.params.id}, function(err,doc){
+    // Songs.view('/artist_development/'+req.params.id, {}, function(err, doc) { 
+      var artist = doc;
+      youtube.searchForVideo(escape(artist.name), function(videos){
+        res.render('videos', {
+           locals: {videos: videos},
+           layout: false
+        });      
+      });
+    });  
   });
   
+  app.get('/register', function(req, res){
+    res.render('register.ejs', {
+      locals: {req: req}
+    });
+  });
+    
 
 // App helpers
   app.helpers({
@@ -133,8 +154,12 @@ eval(fs.readFileSync('config.js').toString());
     squareAlbumImage: function(artist){ return artist.artist_images[2].image_url;},
     
     // link helpers
-    artistLink: function(song){ return ("/artists#"+escape(song.key));}
+    artistLink: function(song){ return ("/artists#"+escape(song.key));},
+    
+    // helper for some page elements to be shown or hidden. 
+    // TODO - Always returning true for now, but in the future make this work for real. 
+    isLoggedIn: function(req) { return true; }
   });
 
 
-app.listen(8080);
+app.listen(8080);   
