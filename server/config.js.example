@@ -1,0 +1,9 @@
+var YOUTUBE = {
+  client_key: "ytapi-NAME-PROJECT-dlno96g0-0", 
+  dev_key: "Bs2sdsd023ofsdfds...."
+};
+
+var AUTH = {
+	encryption_key: "12345678123456781234567812345678",
+	iv: '1234567812345678'
+};

@@ -1,0 +1,66 @@
+--- !ruby/object:Gem::Specification 
+name: mb-discid
+version: !ruby/object:Gem::Version 
+  version: 0.1.4
+platform: ruby
+authors: 
+- Philipp Wolfer
+autorequire: mb-discid
+bindir: bin
+cert_chain: []
+
+date: 2009-11-18 00:00:00 -06:00
+default_executable: 
+dependencies: []
+
+description: "    Ruby bindings for libdiscid. See http://musicbrainz.org/doc/libdiscid\n    for more information on libdiscid and MusicBrainz.\n"
+email: phw@rubyforge.org
+executables: []
+
+extensions: 
+- ext/extconf.rb
+extra_rdoc_files: 
+- README
+- LICENSE
+- CHANGES
+files: 
+- Rakefile
+- LICENSE
+- README
+- CHANGES
+- examples/discid.rb
+- ext/mb_discid.c
+- ext/extconf.rb
+- lib/mb-discid.rb
+- test/test_discid.rb
+has_rdoc: true
+homepage: http://rbrainz.rubyforge.org
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+- ext
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: 1.8.6
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: 
+- libdiscid (http://musicbrainz.org/doc/libdiscid)
+rubyforge_project: rbrainz
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: Ruby bindings for libdiscid.
+test_files: []
+

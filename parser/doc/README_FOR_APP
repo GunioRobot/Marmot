@@ -1,0 +1,7 @@
+== Welcome to Popcorn
+
+Popcorn is an itunes-like interface for the web consisting of the following technologies:
+* Rails
+* CouchDb
+* Node.js (and websockets)
+* RightJS

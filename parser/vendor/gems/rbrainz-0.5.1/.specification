@@ -1,0 +1,217 @@
+--- !ruby/object:Gem::Specification 
+name: rbrainz
+version: !ruby/object:Gem::Version 
+  version: 0.5.1
+platform: ruby
+authors: 
+- Philipp Wolfer
+- Nigel Graham
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-08-03 00:00:00 -05:00
+default_executable: 
+dependencies: []
+
+description: RBrainz is a Ruby client library to access the MusicBrainz XML web service. RBrainz supports the MusicBrainz XML Metadata Version 1.2, including support for labels and extended release events.  RBrainz follows the design of python-musicbrainz2, the reference implementation for a MusicBrainz client library. Developers used to python-musicbrainz2 should already know most of RBrainz' interface. However, RBrainz differs from python-musicbrainz2 wherever it makes the library more Ruby like or easier to use.
+email: phw@rubyforge.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- doc/README.rdoc
+- LICENSE
+- TODO
+- CHANGES
+files: 
+- Rakefile
+- LICENSE
+- README
+- TODO
+- CHANGES
+- setup.rb
+- doc/README.rdoc
+- examples/searchreleasegroups.rb
+- examples/getreleasegroup.rb
+- examples/searchcdstubs.rb
+- examples/searchtracks.rb
+- examples/getuser.rb
+- examples/getlabel.rb
+- examples/searchartists.rb
+- examples/getrelease.rb
+- examples/gettrack.rb
+- examples/getartist.rb
+- examples/searchreleases.rb
+- examples/submit_isrcs.rb
+- examples/searchlabels.rb
+- examples/rate.rb
+- examples/tag.rb
+- lib/rbrainz/model/release_event.rb
+- lib/rbrainz/model/relation.rb
+- lib/rbrainz/model/user.rb
+- lib/rbrainz/model/label.rb
+- lib/rbrainz/model/rateable.rb
+- lib/rbrainz/model/release.rb
+- lib/rbrainz/model/rating.rb
+- lib/rbrainz/model/disc.rb
+- lib/rbrainz/model/scored_collection.rb
+- lib/rbrainz/model/individual.rb
+- lib/rbrainz/model/alias.rb
+- lib/rbrainz/model/incomplete_date.rb
+- lib/rbrainz/model/collection.rb
+- lib/rbrainz/model/release_group.rb
+- lib/rbrainz/model/artist.rb
+- lib/rbrainz/model/isrc.rb
+- lib/rbrainz/model/track.rb
+- lib/rbrainz/model/relateable.rb
+- lib/rbrainz/model/taggable.rb
+- lib/rbrainz/model/mbid.rb
+- lib/rbrainz/model/tag.rb
+- lib/rbrainz/model/default_factory.rb
+- lib/rbrainz/model/entity.rb
+- lib/rbrainz/utils/helper.rb
+- lib/rbrainz/utils/data.rb
+- lib/rbrainz/core_ext/range/equality.rb
+- lib/rbrainz/core_ext/net_http_digest.rb
+- lib/rbrainz/core_ext/mbid.rb
+- lib/rbrainz/core_ext/range.rb
+- lib/rbrainz/data/releasetypenames.rb
+- lib/rbrainz/data/countrynames.rb
+- lib/rbrainz/data/languagenames.rb
+- lib/rbrainz/data/scriptnames.rb
+- lib/rbrainz/webservice/webservice.rb
+- lib/rbrainz/webservice/mbxml.rb
+- lib/rbrainz/webservice/filter.rb
+- lib/rbrainz/webservice/query.rb
+- lib/rbrainz/webservice/includes.rb
+- lib/rbrainz/webservice.rb
+- lib/rbrainz/model.rb
+- lib/rbrainz/utils.rb
+- lib/rbrainz/version.rb
+- lib/rbrainz/core_ext.rb
+- lib/rbrainz.rb
+- test/lib/test_relateable.rb
+- test/lib/test_rateable.rb
+- test/lib/mock_webservice.rb
+- test/lib/test_taggable.rb
+- test/lib/test_factory.rb
+- test/lib/testing_helper.rb
+- test/lib/test_entity.rb
+- test/test_label_filter.rb
+- test/test_label.rb
+- test/test_mbxml.rb
+- test/test_disc.rb
+- test/test_rating.rb
+- test/test_release_group_filter.rb
+- test/test_release_filter.rb
+- test/test_track_includes.rb
+- test/test_artist_includes.rb
+- test/test_webservice.rb
+- test/test_utils.rb
+- test/test_isrc.rb
+- test/test_collection.rb
+- test/test_track.rb
+- test/test_query.rb
+- test/test_label_includes.rb
+- test/test_artist.rb
+- test/test_tag.rb
+- test/test_release_includes.rb
+- test/test_range_equality.rb
+- test/test_relation.rb
+- test/test_release.rb
+- test/test_alias.rb
+- test/test_release_event.rb
+- test/test_mbid.rb
+- test/test_release_group_includes.rb
+- test/test_scored_collection.rb
+- test/test_incomplete_date.rb
+- test/test_release_group.rb
+- test/test_track_filter.rb
+- test/test_default_factory.rb
+- test/test_artist_filter.rb
+- test/test-data/valid
+- test/test-data/valid/label
+- test/test-data/valid/label/Atlantic_Records_1.xml
+- test/test-data/valid/label/Atlantic_Records_2.xml
+- test/test-data/valid/label/Atlantic_Records_3.xml
+- test/test-data/valid/label/search_result_1.xml
+- test/test-data/valid/release
+- test/test-data/valid/release/Mission_Impossible_2.xml
+- test/test-data/valid/release/Under_the_Pink_3.xml
+- test/test-data/valid/release/search_result_1.xml
+- test/test-data/valid/release/Highway_61_Revisited_1.xml
+- test/test-data/valid/release/Highway_61_Revisited_2.xml
+- test/test-data/valid/release/Little_Earthquakes_1.xml
+- test/test-data/valid/release/Little_Earthquakes_2.xml
+- test/test-data/valid/release/Under_the_Pink_1.xml
+- test/test-data/valid/release/Under_the_Pink_2.xml
+- test/test-data/valid/track
+- test/test-data/valid/track/Silent_All_These_Years_1.xml
+- test/test-data/valid/track/Silent_All_These_Years_2.xml
+- test/test-data/valid/track/Silent_All_These_Years_3.xml
+- test/test-data/valid/track/search_result_1.xml
+- test/test-data/valid/track/Silent_All_These_Years_4.xml
+- test/test-data/valid/track/Silent_All_These_Years_5.xml
+- test/test-data/valid/track/Silent_All_These_Years_6.xml
+- test/test-data/valid/artist
+- test/test-data/valid/artist/search_result_1.xml
+- test/test-data/valid/artist/Tori_Amos_5.xml
+- test/test-data/valid/artist/Tchaikovsky-1.xml
+- test/test-data/valid/artist/Tori_Amos_1.xml
+- test/test-data/valid/artist/Tchaikovsky-2.xml
+- test/test-data/valid/artist/Tori_Amos_2.xml
+- test/test-data/valid/artist/Tori_Amos_3.xml
+- test/test-data/valid/artist/empty_1.xml
+- test/test-data/valid/artist/Tori_Amos_4.xml
+- test/test-data/valid/artist/empty_2.xml
+- test/test-data/valid/release-group
+- test/test-data/valid/release-group/search_result_1.xml
+- test/test-data/valid/release-group/The_Cure_1.xml
+- test/test-data/valid/user
+- test/test-data/valid/user/User_1.xml
+- test/test-data/invalid
+- test/test-data/invalid/release
+- test/test-data/invalid/track
+- test/test-data/invalid/artist
+- test/test-data/invalid/artist/ratings_1.xml
+- test/test-data/invalid/artist/empty_3.xml
+- test/test-data/invalid/artist/basic_1.xml
+- test/test-data/invalid/artist/basic_2.xml
+- test/test-data/invalid/artist/search_result_1.xml
+- test/test-data/invalid/artist/ratings_2.xml
+- test/test-data/invalid/artist/empty_1.xml
+- test/test-data/invalid/artist/tags_1.xml
+- test/test-data/invalid/artist/empty_2.xml
+- test/test-data/README
+has_rdoc: true
+homepage: http://rbrainz.rubyforge.org
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: 
+- "Optional: mb-discid >= 0.1.2 (for calculating disc IDs)"
+rubyforge_project: rbrainz
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 2
+summary: Ruby library for the MusicBrainz XML web service.
+test_files: []
+

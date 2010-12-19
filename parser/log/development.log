@@ -1,0 +1,124 @@
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:37:50) [GET]
+Rendering artists/index
+
+ActionView::TemplateError (undefined method `name' for nil:NilClass) on line #2 of app/views/artists/index.html.erb:
+1: <% @artists.each do |artist| %>
+2: 	<h1><%= @artist.name %></h1>
+3: 	<p><%= @artist.about_short %></p>
+4: 	<p><%= @artist.about_long %></p>
+5: 	<p><hr /></p>
+
+    app/views/artists/index.html.erb:2
+    couchrest (0.35) lib/couchrest/more/./mixins/collection.rb:146:in `method_missing'
+    couchrest (0.35) lib/couchrest/more/./mixins/collection.rb:146:in `each'
+    couchrest (0.35) lib/couchrest/more/./mixins/collection.rb:146:in `send'
+    couchrest (0.35) lib/couchrest/more/./mixins/collection.rb:146:in `method_missing'
+    app/views/artists/index.html.erb:1
+
+Rendered rescues/_trace (108.0ms)
+Rendered rescues/_request_and_response (4.2ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:38:06) [GET]
+Rendering artists/index
+Completed in 3071ms (View: 3018, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:38:53) [GET]
+Rendering artists/index
+Completed in 3131ms (View: 3078, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:39:23) [GET]
+Rendering artists/index
+Completed in 3188ms (View: 3136, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:46:19) [GET]
+Rendering artists/index
+Completed in 706ms (View: 16, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:46:27) [GET]
+Rendering artists/index
+Completed in 639ms (View: 16, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:46:33) [GET]
+Rendering artists/index
+Completed in 2966ms (View: 229, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:46:40) [GET]
+Rendering artists/index
+Completed in 1101ms (View: 28, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:47:29) [GET]
+Rendering artists/index
+Completed in 1510ms (View: 424, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:48:04) [GET]
+Rendering artists/index
+Completed in 1154ms (View: 60, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:48:11) [GET]
+Rendering artists/index
+Completed in 1108ms (View: 59, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:48:20) [GET]
+Rendering artists/index
+Completed in 1052ms (View: 33, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#index (for 127.0.0.1 at 2010-03-17 15:48:59) [GET]
+Rendering artists/index
+Completed in 1449ms (View: 360, DB: 0) | 200 OK [http://localhost/artists]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:49:01) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 67ms (View: 17, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:49:34) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 9182ms (View: 9129, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:49:47) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 137ms (View: 84, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:49:47) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 133ms (View: 81, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:49:48) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 135ms (View: 80, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:49:49) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 154ms (View: 95, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
+
+
+Processing ArtistsController#show (for 127.0.0.1 at 2010-03-17 15:52:05) [GET]
+  Parameters: {"id"=>"animal-kingdom"}
+Rendering artists/show
+Completed in 142ms (View: 87, DB: 0) | 200 OK [http://localhost/artists/animal-kingdom]
