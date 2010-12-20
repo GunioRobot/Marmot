@@ -21,29 +21,37 @@ var CouchClient = require('couch-client');
 var Songs = CouchClient("http://localhost:5984/artist_development");
 
 // require the user model
-var user = require('./lib/user')();
 var YouTube = require('./lib/youtube');
 var youtube = YouTube(YOUTUBE.client_key, YOUTUBE.dev_key);
 
+var Auth = require('./lib/authentication');
+var auth = Auth(AUTH.encryption_key, AUTH.iv);
+var User = require('./lib/user');
+var user = User(auth);
+
 // Create the Express app.
 var app = express.createServer();
+app.use(express.bodyDecoder());
+app.use(connect.logger()); // For some reason, the logger has to be first... 
 app.use(express.cookieDecoder());
 app.use(express.session());
 app.use(app.router);
-app.use(connect.logger()); // For some reason, the logger has to be first... 
 app.use(express.methodOverride());
-app.use(express.bodyDecoder());
+
 app.use(express.staticProvider(__dirname + '/public'));
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));            
 app.set('views');
 app.set('view engine','ejs');      
 
+
 function isLoggedIn(req, res, callback){
-  if(req.session.logged_in){
-    callback(true);
-  }else{
-    callback(true);
-  };
+  user.exists(req.session.db_id, function(result){
+    if(result == true){
+      callback(result);
+    }else{
+      res.redirect('/register');
+    };
+  });  
 };
                     
 app.get('/', function(req, res){
@@ -107,9 +115,10 @@ app.get('/register', function(req, res){
   });
 });
 
-app.post('/register', function(req,res){
-  user.create(AUTH, req, function(user){
-		res.redirect('/register');
+app.post('/register', function(req,res){  
+  user.create(req, function(user){
+    req.session.db_id = user._id;
+		res.redirect('/');
 	});
 });
 
