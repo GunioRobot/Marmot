@@ -1,7 +1,8 @@
 var crypto = require("./crypto");
-
+  // Helpful link: https://github.com/waveto/node-crypto/blob/master/test.js
+  
 function Authenticate(key, iv) {
-
+  
   var encryption_key = key;
   var iv = iv;
   var cipher_type = "aes-256-cbc";
