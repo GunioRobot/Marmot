@@ -39,12 +39,17 @@ function User(auth) {
     }
   };  
   
-  function login(req, callback){
-    Users.view('/artist_users/_design/login/_view/UserName', {key: req.params.id}, function(err, doc){
-      if(doc){
-        var decrypted_password = auth.decrypt(doc.password);
-        if(decrypted_password == req.body.password){
-          callback(true);
+  function login(req, callback){ 
+    var username = req.body.username,
+      password = req.body.password;
+      
+    Users.view('/artist_users/_design/login/_view/UserName', {key: username}, function(err, doc){
+      var result_doc = doc.rows[0]; 
+      if(result_doc){
+        var encrypted_password = result_doc.value.password;
+        var decrypted_password = auth.decrypt(encrypted_password);
+        if(decrypted_password == password){
+          callback(result_doc);
         }else{
           callback(false);
         }
@@ -57,7 +62,8 @@ function User(auth) {
   // Exposes the API.
   return {
     create: create,
-    exists: exists
+    exists: exists,
+    login: login
   };
   
   

@@ -44,16 +44,19 @@ app.set('views');
 app.set('view engine','ejs');      
 
 
+// Checks to see if the user is logged in. If not, redirects them to /login;
 function isLoggedIn(req, res, callback){
   user.exists(req.session.db_id, function(result){
     if(result == true){
       callback(result);
     }else{
-      res.redirect('/register');
+      req.session.redirect_to = res.url;
+      res.redirect('/login');
     };
   });  
 };
-                    
+
+// GET: Root path. Shows all the artists.
 app.get('/', function(req, res){
   if(isLoggedIn(req, res, function(result){
     Songs.view('/artist_development/_design/Artist/_view/all', {}, function(err, doc) {
@@ -64,6 +67,7 @@ app.get('/', function(req, res){
   }));    
 });
 
+// GET: Shows a particular artist based on the artist slug
 app.get('/artists/:id', function(req,res){
   if(isLoggedIn(req, res, function(result){
     Songs.view('/artist_development/'+req.params.id, {}, function(err, doc) {
@@ -86,6 +90,7 @@ app.get('/artists/:id', function(req,res){
   }));
 }); 
 
+// GET: Plays a song based on the given song slug
 app.get('/play/:song_slug', function(req, res){
   if(isLoggedIn(req, res, function(result){
     Songs.view('/artist_development/'+req.params.song_slug, {}, function(err, doc){
@@ -94,7 +99,8 @@ app.get('/play/:song_slug', function(req, res){
     });      
   }));
 });
-
+ 
+// GET: Gets a bunch of videos for the given :id (which is the artist slug)
 app.get('/videos/:id', function(req,res){
   if(isLoggedIn(req, res, function(result){
     Songs.view('/artist_development/_design/Artist/_view/by_slug', {key: req.params.id}, function(err,doc){
@@ -109,17 +115,45 @@ app.get('/videos/:id', function(req,res){
   }));
 });
 
+// GET: Register
 app.get('/register', function(req, res){
   res.render('register.ejs', {
     locals: {req: req}
   });
 });
 
+// POST: Save registration
+// TODO: Add error handling
 app.post('/register', function(req,res){  
   user.create(req, function(user){
-    req.session.db_id = user._id;
+    req.session.db_id = user.id;
 		res.redirect('/');
 	});
+});
+
+// GET: Shows the login page
+app.get('/login', function(req,res){
+  res.render('login.ejs');
+});
+
+// POST: Perform the login
+// TODO: Add error handling
+app.post('/login',function(req, res){
+  user.login(req, function(user){
+    if(user){       
+      req.session.db_id = user.id;   
+      res.redirect('/');
+    }else{
+      res.render('login.ejs');
+    };
+  });  
+}); 
+
+// GET: Logs someone out
+// TODO: Finish this
+app.get('/logout', function(req, res){
+  
+  res.redirect('/login');
 });
 
 
