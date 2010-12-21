@@ -34,7 +34,7 @@ var app = express.createServer();
 app.use(express.bodyDecoder());
 app.use(connect.logger()); // For some reason, the logger has to be first... 
 app.use(express.cookieDecoder());
-app.use(express.session());
+app.use(express.session({key: 'song_listing'}));
 app.use(app.router);
 app.use(express.methodOverride());
 

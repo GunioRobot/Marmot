@@ -50,7 +50,7 @@ function Youtube(client_key, dev_key) {
     for (var i=0; i < json.data.items.length; i++) {
       try{
         var item = json.data.items[i];
-        if(item.title && item.title && item.thumbnail.sqDefault){
+        if(item.title && item.player['default'] && item.thumbnail.sqDefault){
           videos.push({
             title: item.title,
             thumbnail: item.thumbnail.sqDefault,
