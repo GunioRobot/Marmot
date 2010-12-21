@@ -5,22 +5,22 @@
   var validator = require('validator');
   
   validator.config = {
-		username: ['validates_presence_of', 'validates_uniqueness_of',
-							 {func: 'validates_format_of', rule:'single_word'},
-							 {func:'validates_max_length',rule:20},
-							 {func: 'validates_min_length',rule:3}],
-		email_address: [{func:'validates_format_of', rule:'email_address'}],
-		password: [{func:'validates_equality_of',rule:user_attributes.confirm_password}],
-		agree_to_terms:[{func:'validates_equality_of',rule:'true'}]
-	};     
-	
-	validator.validate(user); 
-	if (validator.hasErrors()) { 
-	  // errors are present... You can get the errors by doing validator.messages
-	}else{
-	  // all data is clean... proceed
-	}
-	
+    username: ['validates_presence_of', 'validates_uniqueness_of',
+               {func: 'validates_format_of', rule:'single_word'},
+               {func:'validates_max_length',rule:20},
+               {func: 'validates_min_length',rule:3}],
+    email_address: [{func:'validates_format_of', rule:'email_address'}],
+    password: [{func:'validates_equality_of',rule:user_attributes.confirm_password}],
+    agree_to_terms:[{func:'validates_equality_of',rule:'true'}]
+  };     
+  
+  validator.validate(user); 
+  if (validator.hasErrors()) { 
+    // errors are present... You can get the errors by doing validator.messages
+  }else{
+    // all data is clean... proceed
+  }
+  
 */
 
 
