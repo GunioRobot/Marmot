@@ -175,7 +175,6 @@ function User(auth) {
     var user_exists = false;
     if(id){
       Users.view('/artist_users/'+id, {}, function(err, doc){
-        console.log(doc);
         if(doc){
           user_exists = true;
         };      

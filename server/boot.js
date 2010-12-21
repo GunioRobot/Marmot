@@ -102,7 +102,7 @@ app.get('/play/:song_slug', function(req, res){
  
 // GET: Gets a bunch of videos for the given :id (which is the artist slug)
 app.get('/videos/:id', function(req,res){
-  if(isLoggedIn(req, res, function(result){  	
+  if(isLoggedIn(req, res, function(result){   
     Songs.view('/artist_development/_design/Artist/_view/by_slug', {key: req.params.id}, function(err,doc){
       var artist = doc.rows[0].value;  
       youtube.searchForVideo(escape(artist.name), function(videos){
@@ -127,15 +127,15 @@ app.get('/register', function(req, res){
 app.post('/register', function(req,res){  
   user.create(req, function(status, result){
     if(status){
-			req.session.db_id = result._id;   
-  		res.redirect('/');
+      req.session.db_id = result._id;   
+      res.redirect('/');
     }else{
       res.render('register.ejs', {
         layout: 'minimal',
-				locals: {errors: result}
+        locals: {errors: result}
       });      
     }
-	});
+  });
 });
 
 // GET: Shows the login page
@@ -159,9 +159,9 @@ app.post('/login',function(req, res){
 });  
 
 app.get('/logout', function(req,res){
-	req.session.destroy(function(err, destroyedBoolean){
-		 res.redirect('/login');
-	});
+  req.session.destroy(function(err, destroyedBoolean){
+     res.redirect('/login');
+  });
 });
 
 // GET: Logs someone out
