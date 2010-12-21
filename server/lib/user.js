@@ -15,42 +15,42 @@ function User(auth) {
     
     var user = {
       username: user_attributes.username,
-			password: user_attributes.password,
-			email_address: user_attributes.email_address,
-			agree_to_terms: user_attributes.agree_to_terms
+      password: user_attributes.password,
+      email_address: user_attributes.email_address,
+      agree_to_terms: user_attributes.agree_to_terms
     };    
 
-  	validator.config = {
-			username: ['validates_presence_of', 'validates_uniqueness_of',
-								 {func: 'validates_format_of', rule:'single_word'},
-								 {func:'validates_max_length',rule:20},
-								 {func: 'validates_min_length',rule:3}],
-			email_address: [{func:'validates_format_of', rule:'email_address'}],
-			password: [{func:'validates_equality_of',rule:user_attributes.confirm_password}],
-			agree_to_terms:[{func:'validates_equality_of',rule:'true'}]
-		};     
-		
-		validator.validate(user); 
-		if (validator.hasErrors()) { 
-			return callback(false, validator.messages);
-		}else{
-			var encrypted_password = auth.encrypt(user_attributes.password); 
-			
-			var user_to_save = {
-				username: user_attributes.username,
-				password: encrypted_password,
-				email_address: user_attributes.email_address,
-				agree_to_terms: user_attributes.agree_to_terms
-			};
-			
-			Users.save(user_to_save, function (err, doc) {
-				if(err){
-					return callback(false, err);
-				}else{
-					return callback(true, doc);
-				};				
-			});
-		};
+    validator.config = {
+      username: ['validates_presence_of', 'validates_uniqueness_of',
+                 {func: 'validates_format_of', rule:'single_word'},
+                 {func:'validates_max_length',rule:20},
+                 {func: 'validates_min_length',rule:3}],
+      email_address: [{func:'validates_format_of', rule:'email_address'}],
+      password: [{func:'validates_equality_of',rule:user_attributes.confirm_password}],
+      agree_to_terms:[{func:'validates_equality_of',rule:'true'}]
+    };     
+    
+    validator.validate(user); 
+    if (validator.hasErrors()) { 
+      return callback(false, validator.messages);
+    }else{
+      var encrypted_password = auth.encrypt(user_attributes.password); 
+      
+      var user_to_save = {
+        username: user_attributes.username,
+        password: encrypted_password,
+        email_address: user_attributes.email_address,
+        agree_to_terms: user_attributes.agree_to_terms
+      };
+      
+      Users.save(user_to_save, function (err, doc) {
+        if(err){
+          return callback(false, err);
+        }else{
+          return callback(true, doc);
+        };        
+      });
+    };
   };
   
   function exists(id, callback){
