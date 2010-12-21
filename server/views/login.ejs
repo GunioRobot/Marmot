@@ -1,9 +1,11 @@
 <form action="/login" method="post">
 	<div>
 		<label>Username</label>
-		<input type="text" name="username" value="" />
+		<input type="text" name="username" value="" autocomplete=off />
 		<label>Password</label>
-		<input type="password" name="password" value="" />
+		<input type="password" name="password" value="" autocomplete=off />
 		<input type="submit" value="Log in" />
 	</div>
 </form>
+<hr />
+<p>Don't have a username and password? <a href="/register">Register now!</a></p>

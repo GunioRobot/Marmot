@@ -1,23 +1,27 @@
 <% try{ %>
-	<% for (var i=0; i < errors.length; i++) { %>
-		<%= errors[i].attribute %> / <%= errors[i].message %><br />
-	<% }; %>	
+	<div class='errors'>
+		<ul>
+			<% for (var i=0; i < errors.length; i++) { %>
+				<li><%= errors[i].attribute %> / <%= errors[i].message %></li>
+			<% }; %>	
+		</ul>
+	</div>
 <% }catch(err){} %>
 
 
 <form action="/register" method="post">	
 	<dl>
 		<dt><label>Username</label></dt>
-		<dd><input type="text" name="username" value="" id="username" /></dd>          
+		<dd><input type="text" name="username" value="" id="username" autocomplete=off /></dd>          
 		
 		<dt><label>Email Address</label></dt>
-		<dd><input type="text" name="email_address" value="" id="email_address" /></dd>
+		<dd><input type="text" name="email_address" value="" id="email_address" autocomplete=off /></dd>
 		
 		<dt><label>Password</label></dt>
-		<dd><input type="password" name="password" value="" id="password" /></dd>
+		<dd><input type="password" name="password" value="" id="password" autocomplete=off /></dd>
 		
 		<dt><label>Confirm Password</label></dt>
-		<dd><input type="password" name="confirm_password" value="" id="confirm_password" /></dd>
+		<dd><input type="password" name="confirm_password" value="" id="confirm_password" autocomplete=off /></dd>
 		
 		<dt><label>I agree to the terms</label></dt>
 		<dd><input type="checkbox" name="agree_to_terms" value="true" id="agree_to_terms" /></dd>

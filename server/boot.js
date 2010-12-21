@@ -158,17 +158,13 @@ app.post('/login',function(req, res){
   });  
 });  
 
+// GET: Logs someone out
 app.get('/logout', function(req,res){
   req.session.destroy(function(err, destroyedBoolean){
      res.redirect('/login');
   });
 });
 
-// GET: Logs someone out
-// TODO: Finish this
-app.get('/logout', function(req, res){  
-  res.redirect('/login');
-});
 
 
 // App helpers
