@@ -102,9 +102,9 @@ app.get('/play/:song_slug', function(req, res){
  
 // GET: Gets a bunch of videos for the given :id (which is the artist slug)
 app.get('/videos/:id', function(req,res){
-  if(isLoggedIn(req, res, function(result){
+  if(isLoggedIn(req, res, function(result){  	
     Songs.view('/artist_development/_design/Artist/_view/by_slug', {key: req.params.id}, function(err,doc){
-      var artist = doc;
+      var artist = doc.rows[0].value;  
       youtube.searchForVideo(escape(artist.name), function(videos){
         res.render('videos', {
            locals: {videos: videos},
@@ -118,22 +118,29 @@ app.get('/videos/:id', function(req,res){
 // GET: Register
 app.get('/register', function(req, res){
   res.render('register.ejs', {
-    locals: {req: req}
+    layout: 'minimal'
   });
 });
 
 // POST: Save registration
 // TODO: Add error handling
 app.post('/register', function(req,res){  
-  user.create(req, function(user){
-    req.session.db_id = user.id;
-		res.redirect('/');
+  user.create(req, function(status, result){
+    if(status){
+			req.session.db_id = result._id;   
+  		res.redirect('/');
+    }else{
+      res.render('register.ejs', {
+        layout: 'minimal',
+				locals: {errors: result}
+      });      
+    }
 	});
 });
 
 // GET: Shows the login page
 app.get('/login', function(req,res){
-  res.render('login.ejs');
+  res.render('login.ejs', {layout: 'minimal'});
 });
 
 // POST: Perform the login
@@ -144,15 +151,22 @@ app.post('/login',function(req, res){
       req.session.db_id = user.id;   
       res.redirect('/');
     }else{
-      res.render('login.ejs');
+      res.render('login.ejs',{
+        layout: 'minimal'
+      });
     };
   });  
-}); 
+});  
+
+app.get('/logout', function(req,res){
+	req.session.destroy(function(err, destroyedBoolean){
+		 res.redirect('/login');
+	});
+});
 
 // GET: Logs someone out
 // TODO: Finish this
-app.get('/logout', function(req, res){
-  
+app.get('/logout', function(req, res){  
   res.redirect('/login');
 });
 

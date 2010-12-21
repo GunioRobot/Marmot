@@ -1,3 +1,10 @@
+<% try{ %>
+	<% for (var i=0; i < errors.length; i++) { %>
+		<%= errors[i].attribute %> / <%= errors[i].message %><br />
+	<% }; %>	
+<% }catch(err){} %>
+
+
 <form action="/register" method="post">	
 	<dl>
 		<dt><label>Username</label></dt>
@@ -18,4 +25,7 @@
 		<dt>&nbsp;</dt>
 		<dd><input type="submit" name="submit" value="Register" id="submit" /></dd>
 	</dl>	
-</form>
+</form>     
+
+<hr />
+<p>Already have a username? <a href="/login">Sign in now!</a></p>
