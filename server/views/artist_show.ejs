@@ -20,7 +20,8 @@
 					 data-artisturl='/artists/<%= artist.slug %>' 
 					 data-artist='<%= artist.name %>' 
 					 data-album='<%= record.album.name %>' 
-					 data-song='<%= record.song.name %>'>
+					 data-song='<%= record.song.name %>',
+					 data-artistslug='<%= artist.slug %>'>
 						<%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %>
 				</a>
 			</li>

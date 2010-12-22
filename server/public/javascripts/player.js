@@ -89,7 +89,8 @@ app.player.Play = function(){
     var album = $(element).attr('data-album');
     var song = $(element).attr('data-song');
     var href = $(element).attr('data-artisturl');
-    $('#now_playing').html("<a data-artistname='"+artist+"' href='" + href + "' class='ajax_link' rel='"+ href +"'>" + artist + " / " + album + " / " + song + "</a>");
+    var slug = $(element).attr('data-artistslug');
+    $('#now_playing').html("<a data-artistname='"+artist+"' href='/#/show/" + slug + "' class='ajax_link' rel='"+ href +"'>" + artist + " / " + album + " / " + song + "</a>");
   };
   
   // Clears the who's playing dom element

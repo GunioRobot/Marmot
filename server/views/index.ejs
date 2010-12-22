@@ -1,8 +1,13 @@
-<div id='artist_list'>
+<div id='artist_list'>  
+	
+	<input type="search" name="artist_search" value="" id="artist_search" placeholder="Search" />
+	
+	<hr />
+	
 	<ul>   	
 		<% for(var i=0; i < songs.length; i++) { %>
 			<li>                       
-				<a href="#/show/<%= escape(songs[i].key)%>"><%= songs[i].value %></a>
+				<a href="#/show/<%= escape(songs[i].key)%>" class='artist_listing'><%= songs[i].value %></a>
 			</li>
 		<% } %>
 	</ul>

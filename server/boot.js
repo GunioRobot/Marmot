@@ -15,9 +15,11 @@ eval(fs.readFileSync('config.js').toString());
 // Requires
 var express = require('express'); 
 var sys = require("sys");   
-var connect = require('connect');  
+var connect = require('connect'); 
+// var Monomi = require("./lib/browser_type"); 
+// var fugue = require('fugue');
 var _ = require('underscore');
-var CouchClient = require('couch-client');  
+var CouchClient = require('couch-client');
 var Songs = CouchClient("http://localhost:5984/artist_development");
 
 // require the user model
@@ -32,29 +34,16 @@ var user = User(auth);
 // Create the Express app.
 var app = express.createServer();
 app.use(express.bodyDecoder());
+// app.use(Monomi.detectBrowserType());
 app.use(connect.logger()); // For some reason, the logger has to be first... 
 app.use(express.cookieDecoder());
 app.use(express.session({key: 'song_listing'}));
 app.use(app.router);
 app.use(express.methodOverride());
-
 app.use(express.staticProvider(__dirname + '/public'));
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));            
 app.set('views');
 app.set('view engine','ejs');      
-
-
-// Checks to see if the user is logged in. If not, redirects them to /login;
-function isLoggedIn(req, res, callback){
-  user.exists(req.session.db_id, function(result){
-    if(result == true){
-      callback(result);
-    }else{
-      req.session.redirect_to = res.url;
-      res.redirect('/login');
-    };
-  });  
-};
 
 // GET: Root path. Shows all the artists.
 app.get('/', function(req, res){
@@ -139,7 +128,7 @@ app.post('/register', function(req,res){
 });
 
 // GET: Shows the login page
-app.get('/login', function(req,res){
+app.get('/login', function(req,res){ 
   res.render('login.ejs', {layout: 'minimal'});
 });
 
@@ -177,5 +166,19 @@ app.helpers({
   artistLink: function(song){ return ("/artists#"+escape(song.key));}
 });
 
+// Checks to see if the user is logged in. If not, redirects them to /login;
+var isLoggedIn = function(req, res, callback){
+  user.exists(req.session.db_id, function(result){
+    if(result == true){
+      callback(result);
+    }else{
+      req.session.redirect_to = res.url;
+      res.redirect('/login');
+    };
+  });  
+};
+
 
 app.listen(8080);   
+
+// fugue.start(app, 8080, null, 2, {verbose : true});
