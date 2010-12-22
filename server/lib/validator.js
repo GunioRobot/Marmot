@@ -52,7 +52,7 @@ var validator = {
             if (!checker) { // uh-oh 
               throw { 
                 name: "ValidationError", 
-                message: "No handler to validate type " + type 
+                message: "No handler to validate type " + checker 
               }; 
             };
        
@@ -79,7 +79,7 @@ var validator = {
             if (!checker) { // uh-oh 
               throw { 
                 name: "ValidationError", 
-                message: "No handler to validate type " + type 
+                message: "No handler to validate type " + checker 
               }; 
             };             
 
