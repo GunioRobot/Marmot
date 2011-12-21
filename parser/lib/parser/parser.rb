@@ -1,8 +1,8 @@
-module Parser	
-	class Base  # Parser::Base		
+module Parser
+	class Base  # Parser::Base
 		# Requries...
 		require File.join(RAILS_ROOT,'lib','parser','lib','mp3.rb')
-		
+
 		attr_accessor :root_file_path    # The path to the root directory where media files live. A recursive search is performed.
 		attr_accessor :songs_to_process  # Holds all the songs that need to be parsed.
 		attr_accessor :valid_files			 # Works with the VALID_FILE_EXTENSIONS constant and creates upcase versions of the file extension just in case.
@@ -12,31 +12,31 @@ module Parser
 
 		# Initializes a new Parser object.
 		# Options are:
-		# 
+		#
 		# * <tt>:root_file_path</tt> - The path to the root directory where audio files live. A recursive search will be performed on the directory to glob all files.
 		def initialize(args={})
 			@root_file_path = args[:root_file_path]
 			@songs_to_process = []
-		end	
+		end
 
 		# Fetches all the song files that are of the VALID_FILE_EXTENSION type. Iterates through them and puts them in the self.songs_to_process attribute
 		def fetch_song_files
 			Dir[self.parse_path_with_filter].each do |file_path|
-				self.songs_to_process << file_path 
+				self.songs_to_process << file_path
 			end
 		end
-		
+
 		# Returns the root parse path with a file extension filter to use with Dir.glob.
-		# 
+		#
 		# Returns a string like: /path/to/media/files/**/*.{MP3,mp3,M4A,m4a}
 		def parse_path_with_filter
 			File.join(self.root_file_path,"**","*.{#{self.valid_file_extensions.join(",")}}")
 		end
 
-		# Iterates through all the self.songs_to_process attribute. The file will be processed depending on the file extension. 
-		# 
+		# Iterates through all the self.songs_to_process attribute. The file will be processed depending on the file extension.
+		#
 		# Checks the file extension and will use one of the following modules to extract the artist/album/song information:
-		# 
+		#
 		# * Parser::MediaType::Mp3 - For *.mp3 files
 		# * Parser::MediaType::Acc - For *.acc files
 		# * Parser::MediaType::M4a - For *.m4a files
@@ -57,8 +57,8 @@ module Parser
 		end
 
 		# Returns the the valid file extensions in upcase and downcase formats.
-		# 
-		# Example: self.valid_file_extensions returns ["mp3","MP3","m4a","M4A"] 
+		#
+		# Example: self.valid_file_extensions returns ["mp3","MP3","m4a","M4A"]
 		def valid_file_extensions
 			valid_files = []
 			VALID_FILE_EXTENSIONS.each do |file_extension|
@@ -78,7 +78,7 @@ module Parser
 		def song_does_not_exist?(file_path)
 			Song.by_file_path(:key => file_path).first == nil
 		end
-		
+
 		# Returns the file extension of a file in downcased format
 		# Arguements are:
 		#

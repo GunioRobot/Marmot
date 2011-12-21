@@ -20,7 +20,7 @@ class TestWebservice < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_base_exception
     assert_inherited_from(Webservice::WebserviceError, ::Exception)
     assert_inherited_from(Webservice::ConnectionError, Webservice::WebserviceError)
@@ -29,14 +29,14 @@ class TestWebservice < Test::Unit::TestCase
     assert_inherited_from(Webservice::ResourceNotFoundError, Webservice::WebserviceError)
     assert_inherited_from(Webservice::ResponseError, Webservice::WebserviceError)
   end
-  
+
   def test_get_success
     ws = Webservice::Webservice.new(:host => @testserver)
     assert_nothing_raised {
       ws.get(:artist, :id => Model::MBID.parse('10bf95b6-30e3-44f1-817f-45762cdc0de0', :artist))
     }
   end
-  
+
   # 400 - Bad Request
   def test_get_request_error
     ws = Webservice::Webservice.new(:host => @testserver)
@@ -45,7 +45,7 @@ class TestWebservice < Test::Unit::TestCase
              :include => 'inc=invalid')
     }
   end
-  
+
   # 404 - Not Found
   def test_get_resource_not_found_error
     ws = Webservice::Webservice.new(:host => @testserver, :path_prefix => '/invalid')
@@ -53,7 +53,7 @@ class TestWebservice < Test::Unit::TestCase
       ws.get(:artist, :id => Model::MBID.parse('10bf95b6-30e3-44f1-817f-45762cdc0de0', :artist))
     }
   end
-  
+
   def test_get_connection_error
     ws = Webservice::Webservice.new(:host => 'invalid.host.tld')
     ws.open_timeout = 0.1
@@ -61,7 +61,7 @@ class TestWebservice < Test::Unit::TestCase
       ws.get(:artist, :id => Model::MBID.parse('10bf95b6-30e3-44f1-817f-45762cdc0de0', :artist))
     }
   end
-  
+
   def test_user
     ws = Webservice::Webservice.new()
     assert_raise(Webservice::AuthenticationError) {

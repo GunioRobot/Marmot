@@ -11,7 +11,7 @@ require 'rbrainz'
 
 # Unit test for range equality extension.
 class TestRangeEquality < Test::Unit::TestCase
-  TESTSET = 
+  TESTSET =
     [
       [  1..11,  13..30,                :before?], # a before b
       [ 1...12, 13...30,                :before?], # a before b
@@ -82,7 +82,7 @@ class TestRangeEquality < Test::Unit::TestCase
       :finishes?,
       :finished_by?,
     ]
-  
+
   def self.make_test_method(s)
     st = s.to_s.chop
     class_eval %Q{
@@ -97,7 +97,7 @@ class TestRangeEquality < Test::Unit::TestCase
       end
     }, __FILE__
   end
-  
+
   OPERATIONS.each do |op|
     make_test_method(op)
   end

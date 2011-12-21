@@ -15,21 +15,21 @@ h1 {
 		float: left;
 		width: 100%;
 	}
-	
+
 	#header #subheader {
 		padding-top: 3px;
 		clear:both;
 	}
-	
+
 	#header #subheader a {
 		color: #fff;
 	}
-	
+
 	#header #subheader a:hover {
 		color: #555;
 	}
-	
-	
+
+
 #container {
 	width: 960px;
 	margin: 0 auto;
@@ -45,37 +45,37 @@ h1 {
 	}
 
 #artist_info {
-	float: right;  
+	float: right;
 	width: 760px;
-}   
+}
 
 .artist_header {
 	float: left;
 	width: 100%;
-} 
+}
 
 	.artist_image{
 		float:left;
 		width: 130px;
 		clear: none;
 	}
-	
+
 	.artist_meta {
 		float: left;
 	}
-	
+
 	#artist_videos {
 		height: 120px;
-		width: 630px; 
+		width: 630px;
 		overflow-x: scroll;
 		white-space: nowrap;
 	}
-	
+
 	#artist_videos li{
 		display:inline;
 		margin-left: 5px;
 	}
-	
+
 
 .artist_tracks {
 	float: left;

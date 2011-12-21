@@ -5,7 +5,7 @@ development:
   host: localhost
   port: 5984
   <<: *base
-  
+
 test:
   host: localhost
   port: 5984

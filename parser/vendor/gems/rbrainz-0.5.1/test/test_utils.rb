@@ -18,27 +18,27 @@ class TestUtils < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_country_names
     assert_equal 'Germany', Utils.get_country_name('DE')
     assert_equal nil, Utils.get_country_name('UNKNOWN')
   end
-  
+
   def test_language_names
     assert_equal 'English', Utils.get_language_name('ENG')
     assert_equal nil, Utils.get_language_name('UNKNOWN')
   end
-  
+
   def test_script_names
     assert_equal 'Cyrillic', Utils.get_script_name('Cyrl')
     assert_equal nil, Utils.get_script_name('UNKNOWN')
   end
-  
+
   def test_release_type_names
     assert_equal 'Bootleg', Utils.get_release_type_name(Model::Release::TYPE_BOOTLEG)
     assert_equal nil, Utils.get_release_type_name('UNKNOWN')
   end
-  
+
   def test_add_default_namespace
     name = 'Group'
     name_with_ns = Model::NS_MMD_1 + name
@@ -68,7 +68,7 @@ class TestUtils < Test::Unit::TestCase
     assert_equal name, Utils.remove_namespace(name_with_ns, namespace)
     assert_equal name, Utils.remove_namespace(name, namespace)
   end
-  
+
   def test_entity_type_to_string
     entity_type_symbol = Model::ReleaseGroup::ENTITY_TYPE
     entity_type_string = 'release-group'
@@ -76,7 +76,7 @@ class TestUtils < Test::Unit::TestCase
     assert_equal entity_type_string, result
     assert result.is_a?(String), "Result is not a string."
   end
-  
+
   def test_entity_type_to_symbol
     entity_type_symbol = Model::ReleaseGroup::ENTITY_TYPE
     entity_type_string = 'release-group'
@@ -84,7 +84,7 @@ class TestUtils < Test::Unit::TestCase
     assert_equal entity_type_symbol, result
     assert result.is_a?(Symbol), "Result is not a symbol."
   end
-  
+
   def test_check_options_with_valid_options
     given_options = { :query => '', :offset => 2, :name => 'Test', :limit => 1 }
     assert_nothing_raised { Utils.check_options given_options, :limit, :offset, :query, :name }

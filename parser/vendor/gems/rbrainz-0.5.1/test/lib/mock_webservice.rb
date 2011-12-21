@@ -9,9 +9,9 @@
 require 'rbrainz/webservice/webservice'
 
 class MockWebservice < MusicBrainz::Webservice::IWebservice
-  
+
   DATA_PATH = 'test/test-data/'
-  
+
   def get(entity_type, options = {:id => nil, :include => nil, :filter => nil, :version => 1})
     case entity_type
     when :artist

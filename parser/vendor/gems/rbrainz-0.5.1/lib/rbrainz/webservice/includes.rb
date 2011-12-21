@@ -12,15 +12,15 @@ module MusicBrainz
   module Webservice
 
     # Base class for all include classes.
-    # 
+    #
     # Includes are used to specify which detail information should be returned
     # for an entity search. There is one include class for each entity type.
     class AbstractIncludes
-    
+
       def initialize(includes)
         raise 'Tried to initialize abstract class.'
-      end 
-      
+      end
+
       # Returns the includes as a parameter that can be used in a MusicBrainz
       # XML web service URI.
       def to_s
@@ -32,15 +32,15 @@ module MusicBrainz
       end
 
     end
-    
+
     # A specification on how much data to return with an artist.
-    # 
+    #
     # The MusicBrainz server only supports some combinations of release types
     # for the releases and vaReleases include tags. At the moment, not more
     # than two release types should be selected, while one of them has to be
     # Release.TYPE_OFFICIAL, Release.TYPE_PROMOTION or Release.TYPE_BOOTLEG.
     class ArtistIncludes < AbstractIncludes
-    
+
       # Includes is a hash with the following fields:
       # [:aliases]      Include aliases (boolean).
       # [:release_groups] Include release groups (boolean).
@@ -65,13 +65,13 @@ module MusicBrainz
       # [:user_tags]    Include user tags (boolean).
       # [:ratings]      Include ratings (boolean).
       # [:user_ratings] Include user ratings (boolean).
-      # 
+      #
       #--
       # TODO:: Check release types. It's possible that :releases
       #        and :va_releases can't be used in parallel.
       #++
       def initialize(includes)
-        Utils.check_options includes, 
+        Utils.check_options includes,
           :aliases, :artist_rels, :release_rels, :track_rels, :label_rels,
           :url_rels, :tags, :release_groups, :releases, :va_releases, :counts,
           :release_events, :discs, :labels, :user_tags, :ratings, :user_ratings
@@ -91,37 +91,37 @@ module MusicBrainz
         @parameters << 'user_tags'    if includes[:user_tags]
         @parameters << 'ratings'      if includes[:ratings]
         @parameters << 'user_ratings' if includes[:user_ratings]
-        
+
         includes[:releases].each {|release_type|
           @parameters << 'sa-' + Utils.remove_namespace(release_type.to_s)
         } if includes[:releases]
-        
+
         includes[:va_releases].each {|release_type|
           @parameters << 'va-' + Utils.remove_namespace(release_type.to_s)
         } if includes[:va_releases]
       end
-      
+
     end
-    
+
     # A specification on how much data to return with a release group.
     class ReleaseGroupIncludes < AbstractIncludes
-    
+
       # Includes is a hash with the following fields:
       # [:artist]       Include track artist (boolean).
       # [:releases]     Include releases of the release group (boolean).
       def initialize(includes)
-        Utils.check_options includes, 
+        Utils.check_options includes,
             :artist, :releases
         @parameters = Array.new
         @parameters << 'artist'       if includes[:artist]
         @parameters << 'releases'       if includes[:releases]
       end
-    
+
     end
-    
+
     # A specification on how much data to return with a release.
     class ReleaseIncludes < AbstractIncludes
-    
+
       # Includes is a hash with the following fields:
       # [:artist]       Include track artist (boolean).
       # [:counts]       Includes the track number (boolean).
@@ -145,7 +145,7 @@ module MusicBrainz
       # [:ratings]      Include ratings (boolean).
       # [:user_ratings] Include user ratings (boolean).
       def initialize(includes)
-        Utils.check_options includes, 
+        Utils.check_options includes,
             :artist, :counts, :release_groups, :release_events, :discs, :tracks,
             :labels, :isrcs, :artist_rels, :release_rels, :track_rels,
             :label_rels, :url_rels, :track_level_rels, :tags, :user_tags,
@@ -170,12 +170,12 @@ module MusicBrainz
         @parameters << 'ratings'      if includes[:ratings]
         @parameters << 'user_ratings' if includes[:user_ratings]
       end
-    
+
     end
-    
+
     # A specification on how much data to return with a track.
     class TrackIncludes < AbstractIncludes
-    
+
       # Includes is a hash with the following fields:
       # [:artist]       Include track artist (boolean).
       # [:releases]     Includes releases the track appears on (boolean).
@@ -191,8 +191,8 @@ module MusicBrainz
       # [:ratings]      Include ratings (boolean).
       # [:user_ratings] Include user ratings (boolean).
       def initialize(includes)
-        Utils.check_options includes, 
-            :artist, :releases, :puids, :isrcs, :artist_rels, :release_rels, 
+        Utils.check_options includes,
+            :artist, :releases, :puids, :isrcs, :artist_rels, :release_rels,
             :track_rels, :label_rels, :url_rels, :tags, :user_tags, :ratings,
             :user_ratings
         @parameters = Array.new
@@ -210,12 +210,12 @@ module MusicBrainz
         @parameters << 'ratings'      if includes[:ratings]
         @parameters << 'user_ratings' if includes[:user_ratings]
       end
-    
+
     end
-    
+
     # A specification on how much data to return with a label.
     class LabelIncludes < AbstractIncludes
-    
+
       # Includes is a hash with the following fields:
       # [:aliases]      Include aliases (boolean).
       # [:artist_rels]  Include artist relationships (boolean).
@@ -228,7 +228,7 @@ module MusicBrainz
       # [:ratings]      Include ratings (boolean).
       # [:user_ratings] Include user ratings (boolean).
       def initialize(includes)
-        Utils.check_options includes, 
+        Utils.check_options includes,
             :aliases, :artist_rels, :release_rels, :track_rels, :label_rels,
             :url_rels, :tags, :user_tags, :ratings, :user_ratings
         @parameters = Array.new
@@ -243,8 +243,8 @@ module MusicBrainz
         @parameters << 'ratings'      if includes[:ratings]
         @parameters << 'user_ratings' if includes[:user_ratings]
       end
-    
+
     end
-    
+
   end
 end

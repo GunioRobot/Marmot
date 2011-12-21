@@ -20,13 +20,13 @@ module MusicBrainz
     #
     # See:: http://wiki.musicbrainz.org/Release_Groups
     class ReleaseGroup < Entity
-      
+
       # A type for not a type. Currently unsupported by MusicBrainz
       TYPE_NONE           = NS_MMD_1 + 'None'
-      
+
       # Special type for release groups that hold non-album track releases.
       TYPE_NON_ALBUM_TRACKS = NS_MMD_1 + 'NonAlbum Track'
-      
+
       # An album, perhaps better defined as a "Long Play" (LP) release,
       # generally consists of previously unreleased material. This includes
       # release re-issues, with or without bonus tracks.
@@ -58,40 +58,40 @@ module MusicBrainz
       # Any release that does not fit or can't decisively be placed in any of
       # the categories above.
       TYPE_OTHER          = NS_MMD_1 + 'Other'
-      
+
       # See Entity::ENTITY_TYPE.
       ENTITY_TYPE = :release_group # :nodoc:
-      
+
       # The title of this release group.
       attr_accessor :title
-      
+
       # A Collection of releases in this release group.
       attr_reader :releases
-      
+
       # The artist of this release group.
       attr_accessor :artist
-      
+
       # The list of types for this release.
       #
       # To test for release types, you can use the constants
       # TYPE_ALBUM, TYPE_SINGLE, etc.
       attr_reader :types
-      
+
       def initialize(id=nil, title=nil)
         super id
         @title = title
         @releases = Collection.new
         @types = Array.new
       end
-      
+
       # Returns the string representation for this release group.
-      # 
+      #
       # Returns #title converted into a string.
       def to_s
         title.to_s
       end
-        
+
     end
-  
+
   end
 end

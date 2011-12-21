@@ -33,7 +33,7 @@ end
 module Test
   module Unit #:nodoc:
     class TestCase #:nodoc:
-      
+
       setup :setup_couchdb_fixtures if defined?(setup)
       teardown :teardown_couchdb_fixtures if defined?(teardown)
 

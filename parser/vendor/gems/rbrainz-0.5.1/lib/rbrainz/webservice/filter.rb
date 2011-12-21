@@ -12,16 +12,16 @@ module MusicBrainz
   module Webservice
 
     # Base class for all filter classes.
-    # 
+    #
     # Filter classes are initialized with a set of criteria and are then
     # applied to collections of items. The criteria are usually strings
     # or integer values, depending on the filter.
     class AbstractFilter
-      
+
       # The parameter _filter_ is a hash with filter options.
       # See the concrete classes for a description of those
       # options.
-      # 
+      #
       # The following options are available for all filters:
       # [:limit]  The maximum number of entries returned. Defaults
       #           to 25, the maximum allowed value is 100.
@@ -37,22 +37,22 @@ module MusicBrainz
         @filter[:offset] = filter[:offset] if filter[:offset]
         @filter[:query]  = filter[:query]  if filter[:query]
       end
-      
+
       # Returns the filter list as a query string (without leading <em>&</em>).
       def to_s
         @filter.to_a.map {|name, value|
           '%s=%s' % [CGI.escape(name.to_s), CGI.escape(value.to_s)]
         }.join('&')
       end
-      
+
     end
-    
+
     # A filter for the artist collection.
     class ArtistFilter < AbstractFilter
-    
+
       # The parameter _filter_ is a hash with filter options. At least the
       # <tt>:name</tt> or <tt>:query</tt> filter must be specified.
-      # 
+      #
       # Available filter options:
       # [:name]   Fetch a list of artists with a matching name.
       # [:limit]  The maximum number of artists returned. Defaults
@@ -68,15 +68,15 @@ module MusicBrainz
         super(filter)
         @filter[:name] = filter[:name]  if filter[:name]
       end
-    
+
     end
-    
+
     # A filter for the release group collection.
     class ReleaseGroupFilter < AbstractFilter
-    
+
       # The parameter _filter_ is a hash with filter options. At least one
       # filter despite <tt>:limit</tt> and <tt>:offset</tt> must be specified.
-      # 
+      #
       # Available filter options:
       # [:title]     Fetch a list of release groups with a matching title.
       # [:artist]    The returned release groups should match the given artist name.
@@ -88,7 +88,7 @@ module MusicBrainz
       #                 as defined in Model::ReleaseGroup or a string of space separated
       #                 values like Official, Bootleg, Album, Compilation etc.
       # [:limit]     The maximum number of release groups returned. Defaults
-      #              to 25, the maximum allowed value is 100. 
+      #              to 25, the maximum allowed value is 100.
       # [:offset]    Return search results starting at a given offset. Used
       #              for paging through more than one page of results.
       # [:query]     A Lucene search query. The query parameter is a search
@@ -96,13 +96,13 @@ module MusicBrainz
       #              engine. It must follow the syntax described in
       #              http://musicbrainz.org/doc/TextSearchSyntax.
       def initialize(filter)
-        Utils.check_options filter, 
+        Utils.check_options filter,
           :limit, :offset, :query, :title, :artist, :artistid, :releasetypes
         super(filter)
         @filter[:title]        = filter[:title]     if filter[:title]
         @filter[:artist]       = filter[:artist]    if filter[:artist]
         @filter[:artistid]     = filter[:artistid]  if filter[:artistid]
-        
+
         if releasetypes = filter[:releasetypes]
           if releasetypes.respond_to?(:to_a)
             releasetypes = releasetypes.to_a.map do |type|
@@ -112,15 +112,15 @@ module MusicBrainz
           @filter[:releasetypes] = releasetypes
         end
       end
-    
+
     end
-    
+
     # A filter for the release collection.
     class ReleaseFilter < AbstractFilter
-    
+
       # The parameter _filter_ is a hash with filter options. At least one
       # filter despite <tt>:limit</tt> and <tt>:offset</tt> must be specified.
-      # 
+      #
       # Available filter options:
       # [:title]     Fetch a list of releases with a matching title.
       # [:discid]    Fetch all releases matching to the given DiscID.
@@ -140,7 +140,7 @@ module MusicBrainz
       # [:cdstubs]   Flag which indicates whether to include CD stubs or not (boolean).
       #              Defaults to false.
       # [:limit]     The maximum number of releases returned. Defaults
-      #              to 25, the maximum allowed value is 100. 
+      #              to 25, the maximum allowed value is 100.
       # [:offset]    Return search results starting at a given offset. Used
       #              for paging through more than one page of results.
       # [:query]     A Lucene search query. The query parameter is a search
@@ -148,8 +148,8 @@ module MusicBrainz
       #              engine. It must follow the syntax described in
       #              http://musicbrainz.org/doc/TextSearchSyntax.
       def initialize(filter)
-        Utils.check_options filter, 
-          :limit, :offset, :query, :title, :discid, :artist, :artistid, 
+        Utils.check_options filter,
+          :limit, :offset, :query, :title, :discid, :artist, :artistid,
           :releasetypes, :count, :date, :asin, :lang, :script, :cdstubs
         super(filter)
         @filter[:title]        = filter[:title]     if filter[:title]
@@ -161,9 +161,9 @@ module MusicBrainz
         @filter[:asin]         = filter[:asin]      if filter[:asin]
         @filter[:lang]         = filter[:lang]      if filter[:lang]
         @filter[:script]       = filter[:script]    if filter[:script]
-        
+
         @filter[:cdstubs] = filter[:cdstubs] ? 'yes' : 'no'
-        
+
         if releasetypes = filter[:releasetypes]
           if releasetypes.respond_to?(:to_a)
             releasetypes = releasetypes.to_a.map do |type|
@@ -173,15 +173,15 @@ module MusicBrainz
           @filter[:releasetypes] = releasetypes
         end
       end
-    
+
     end
-    
+
     # A filter for the track collection.
     class TrackFilter < AbstractFilter
-    
+
       # The parameter _filter_ is a hash with filter options. At least the
       # <tt>:title</tt>, <tt>:puid</tt> or <tt>:query</tt> filter must be specified.
-      # 
+      #
       # Available filter options:
       # [:title]     Fetch a list of tracks with a matching title.
       # [:artist]    The returned tracks have to match the given
@@ -199,7 +199,7 @@ module MusicBrainz
       # [:releasetype] The type of the release this track appears on. See
       #                Model::Release for possible values.
       # [:limit]     The maximum number of tracks returned. Defaults
-      #              to 25, the maximum allowed value is 100. 
+      #              to 25, the maximum allowed value is 100.
       # [:offset]    Return search results starting at a given offset. Used
       #              for paging through more than one page of results.
       # [:query]     A Lucene search query. The query parameter is a search
@@ -207,8 +207,8 @@ module MusicBrainz
       #              engine. It must follow the syntax described in
       #              http://musicbrainz.org/doc/TextSearchSyntax.
       def initialize(filter)
-        Utils.check_options filter, 
-            :limit, :offset, :query, :title, :artist, :release, :duration, 
+        Utils.check_options filter,
+            :limit, :offset, :query, :title, :artist, :release, :duration,
             :tracknum, :artistid, :releaseid, :puid, :count, :releasetype
         super(filter)
         @filter[:title]       = filter[:title]     if filter[:title]
@@ -224,19 +224,19 @@ module MusicBrainz
           @filter[:releasetype] = Utils.remove_namespace(filter[:releasetype])
         end
       end
-    
+
     end
-    
+
     # A filter for the label collection.
     class LabelFilter < AbstractFilter
-    
+
       # The parameter _filter_ is a hash with filter options. At least the
       # <tt>:name</tt> or <tt>:query</tt> filter must be specified.
-      # 
+      #
       # Available filter options:
       # [:name]   Fetch a list of labels with a matching name.
       # [:limit]  The maximum number of labels returned. Defaults
-      #           to 25, the maximum allowed value is 100. 
+      #           to 25, the maximum allowed value is 100.
       # [:offset] Return search results starting at a given offset. Used
       #           for paging through more than one page of results.
       # [:query]  A Lucene search query. The query parameter is a search
@@ -248,16 +248,16 @@ module MusicBrainz
         super(filter)
         @filter[:name] = filter[:name]  if filter[:name]
       end
-    
+
     end
-    
+
     # A filter to query a user by his username.
     class UserFilter
       def initialize(name=nil)
         @filter = Hash.new
         @filter[:name] = name if name
       end
-      
+
       # Returns the filter list as a query string (without leading <em>&</em>).
       def to_s
         @filter.to_a.map {|name, value|
@@ -265,6 +265,6 @@ module MusicBrainz
         }.join('&')
       end
     end
-    
+
   end
 end

@@ -15,7 +15,7 @@ module MusicBrainz
       attr_accessor :name
 
       # The user's types.
-      # 
+      #
       # Most users' type list is empty. Currently, the following types
       # are defined:
       #
@@ -24,22 +24,22 @@ module MusicBrainz
       # - 'http://musicbrainz.org/ns/ext-1.0#Bot'
       # - 'http://musicbrainz.org/ns/ext-1.0#NotNaggable'
       attr_reader :types
-      
+
       def initialize(name=nil)
         self.name = name
         @types = []
       end
-      
+
       # The setter for the nag screen flag.
       def show_nag=(value)
         @show_nag = (value.to_s == 'true')
       end
-      
+
       # The value of the nag screen flag.
       def show_nag?
         @show_nag
       end
-      
+
       def to_s
         return name.to_s
       end

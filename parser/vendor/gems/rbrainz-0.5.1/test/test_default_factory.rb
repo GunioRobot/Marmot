@@ -18,7 +18,7 @@ class TestDefaultFactory < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_new_artist
     factory = Model::DefaultFactory.new
     assert factory.new_artist.is_a?(Model::Artist)
@@ -48,7 +48,7 @@ class TestDefaultFactory < Test::Unit::TestCase
     assert factory.new_track.is_a?(Model::Track)
     assert factory.new_entity(:track).is_a?(Model::Track)
   end
-  
+
   def test_new_alias
     factory = Model::DefaultFactory.new
     assert factory.new_alias.is_a?(Model::Alias)

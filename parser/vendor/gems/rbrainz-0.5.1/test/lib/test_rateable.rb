@@ -27,5 +27,5 @@ module TestRateable
     assert entity.user_rating.is_a?(Model::Rating)
     assert entity.user_rating.empty?
   end
-  
+
 end

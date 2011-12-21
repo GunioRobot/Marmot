@@ -7,19 +7,19 @@
 		<ul id='artist_videos'></ul>
 	</div>
 </div>
- 
+
 <div class='artist_tracks'>
-	
+
 	<ul class='playlist'>
 		<% for(var i=0; i < songs.length; i++) { %>
 			<% var record = songs[i] %>
-			<li>                   
-				<a rel=<%= i %> 
-					 href='/play/<%= record.song.slug %>' 
-					 class='play_song' 
-					 data-artisturl='/artists/<%= artist.slug %>' 
-					 data-artist='<%= artist.name %>' 
-					 data-album='<%= record.album.name %>' 
+			<li>
+				<a rel=<%= i %>
+					 href='/play/<%= record.song.slug %>'
+					 class='play_song'
+					 data-artisturl='/artists/<%= artist.slug %>'
+					 data-artist='<%= artist.name %>'
+					 data-album='<%= record.album.name %>'
 					 data-song='<%= record.song.name %>',
 					 data-artistslug='<%= artist.slug %>'>
 						<%= record.album.name %> / <%= record.song.track_number %> / <%= record.song.name %>

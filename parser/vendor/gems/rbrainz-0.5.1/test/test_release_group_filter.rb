@@ -28,12 +28,12 @@ class TestReleaseGroupFilter < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_filter
     filter = Webservice::ReleaseGroupFilter.new(@filter_hash)
     filter_string = filter.to_s
     assert_not_equal '&', filter_string[0]
-    
+
     result_hash = query_string_to_hash filter_string
     assert_equal @filter_hash[:title], result_hash['title'], filter_string
     assert_equal @filter_hash[:artist], result_hash['artist'], filter_string
@@ -43,19 +43,19 @@ class TestReleaseGroupFilter < Test::Unit::TestCase
     assert_equal @filter_hash[:offset].to_s, result_hash['offset'], filter_string
     assert_equal @filter_hash[:query].to_s, result_hash['query'], filter_string
   end
-  
+
   def test_release_types_as_array
     filter = Webservice::ReleaseGroupFilter.new(:releasetypes => [Model::ReleaseGroup::TYPE_ALBUM, 'Official'])
     filter_string = filter.to_s
     assert_not_equal '&', filter_string[0]
-    
+
     result_hash = query_string_to_hash filter_string
     assert_equal 'Album Official', result_hash['releasetypes'], filter_string
   end
-  
+
   def test_empty_filter
     filter = Webservice::ReleaseGroupFilter.new({})
     assert_equal '', filter.to_s
   end
-  
+
 end

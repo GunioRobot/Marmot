@@ -18,7 +18,7 @@ class TestReleaseGroupIncludes < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_includes
     includes = Webservice::ReleaseGroupIncludes.new(
       :artist => true,
@@ -26,21 +26,21 @@ class TestReleaseGroupIncludes < Test::Unit::TestCase
       )
     result_string = includes.to_s
     assert_equal 'inc=', result_string[0..3]
-    
+
     result_array = result_string[4..-1].split(/%20|\+/)
     assert result_array.include?('artist')
     assert result_array.include?('releases')
   end
-  
+
   def test_empty_includes
     includes = Webservice::ReleaseGroupIncludes.new(
       :artist => false,
       :releases => false
       )
     assert_equal '', includes.to_s
-  
+
     includes = Webservice::ReleaseGroupIncludes.new({})
     assert_equal '', includes.to_s
   end
-  
+
 end

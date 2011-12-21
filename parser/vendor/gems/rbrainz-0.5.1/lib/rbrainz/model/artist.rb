@@ -25,7 +25,7 @@ module MusicBrainz
     # See:: Individual
     # See:: http://musicbrainz.org/doc/Artist.
     class Artist < Individual
-    
+
       # Used if the type of the artist is unknown.
       TYPE_UNKNOWN = NS_MMD_1 + 'Unknown'
       # This indicates an individual person.
@@ -33,18 +33,18 @@ module MusicBrainz
       # This indicates a group of people that may or may
       # not have a distinctive name.
       TYPE_GROUP   = NS_MMD_1 + 'Group'
-    
+
       # See Entity::ENTITY_TYPE.
       ENTITY_TYPE = :artist # :nodoc:
-      
+
       # A Collection of release groups of this artist.
       attr_reader :release_groups
-      
+
       def initialize(id=nil, type=nil, name=nil, sort_name=nil)
         super id, type, name, sort_name
         @release_groups = Collection.new
       end
-      
+
     end
 
   end

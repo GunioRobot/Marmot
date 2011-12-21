@@ -20,11 +20,11 @@ class TestRelation < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_new_relation
     relation = nil
     assert_nothing_raised {relation = Model::Relation.new}
-    
+
     assert_nothing_raised {relation = Model::Relation.new(
       'Wikipedia',
       'http://www.example.com',
@@ -34,7 +34,7 @@ class TestRelation < Test::Unit::TestCase
     assert_equal 'http://www.example.com', relation.target
     assert_equal Model::Relation::DIR_FORWARD, relation.direction
   end
-  
+
   def test_type
     relation = Model::Relation.new
     assert relation.type.nil?
@@ -59,7 +59,7 @@ class TestRelation < Test::Unit::TestCase
     assert_equal nil, relation.begin_date
     assert_nothing_raised {relation.begin_date = date}
     assert_equal date, relation.begin_date
-    
+
     # It should be able to supply a date as a string,
     # but Relation should convert it to an IncompleteDate.
     assert_nothing_raised {relation.begin_date = '1988-04-20'}
@@ -73,13 +73,13 @@ class TestRelation < Test::Unit::TestCase
     assert_equal nil, relation.end_date
     assert_nothing_raised {relation.end_date = date}
     assert_equal date, relation.end_date
-    
+
     # It should be able to supply a date as a string,
     # but Relation should convert it to an IncompleteDate.
     assert_nothing_raised {relation.end_date = '1988-04-20'}
     assert_equal Model::IncompleteDate.new('1988-04-20'), relation.end_date
   end
-  
+
   def test_target
     relation = Model::Relation.new
     assert relation.target.nil?
@@ -88,26 +88,26 @@ class TestRelation < Test::Unit::TestCase
     assert_nothing_raised {relation.target = 'http://www.example.com'}
     assert_equal 'http://www.example.com', relation.target
   end
-  
+
   # Target type is read-only and is automatically set
   # when the target is set.
   def test_target_type
     relation = Model::Relation.new
     assert relation.target_type.nil?
     assert_raise(NoMethodError) {relation.target_type = Model::Relation::TO_RELEASE}
-    
+
     relation.target = Model::Artist.new
     assert_equal Model::Relation::TO_ARTIST, relation.target_type
-    
+
     relation.target = Model::Release.new
     assert_equal Model::Relation::TO_RELEASE, relation.target_type
-    
+
     relation.target = Model::Track.new
     assert_equal Model::Relation::TO_TRACK, relation.target_type
-    
+
     relation.target = Model::Label.new
     assert_equal Model::Relation::TO_LABEL, relation.target_type
-    
+
     relation.target = 'http://www.example.com'
     assert_equal Model::Relation::TO_URL, relation.target_type
   end
@@ -120,9 +120,9 @@ class TestRelation < Test::Unit::TestCase
     assert_nothing_raised {relation.attributes.delete(Model::NS_REL_1 + 'Lead')}
     assert_equal 0, relation.attributes.size
   end
-  
+
   # The to_s method could return a readable representation of the relation.
   #def test_to_string
   #end
-   
+
 end

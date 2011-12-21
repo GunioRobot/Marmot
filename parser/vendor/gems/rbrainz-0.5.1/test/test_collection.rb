@@ -21,19 +21,19 @@ class TestCollection < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_collection
     collection = Model::Collection.new(102, 8)
     assert_equal 102, collection.count
     assert_equal 8, collection.offset
-    
+
     collection.count = 99
     collection.offset=15
     assert_equal 99, collection.count
     assert_equal 15, collection.offset
-    
+
     assert collection.empty?
-    
+
     # Fill the collection
     assert_nothing_raised {
       collection << @artist_one
@@ -41,7 +41,7 @@ class TestCollection < Test::Unit::TestCase
     }
     assert_equal 3, collection.size
     assert !collection.empty?
-    
+
     # Iterate over the collection
     n = 0
     collection.each {|artist|
@@ -49,12 +49,12 @@ class TestCollection < Test::Unit::TestCase
       n += 1
     }
     assert_equal collection.size, n
-    
+
     # Random access
     assert_equal @artist_one, collection[0]
     assert_equal @artist_two, collection[1]
     assert_equal @artist_three, collection[2]
-    
+
     # Convert collection to array
     array = collection.to_a
     assert_equal Array, array.class

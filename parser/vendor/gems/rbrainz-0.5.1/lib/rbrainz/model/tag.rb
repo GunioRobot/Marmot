@@ -11,9 +11,9 @@ module MusicBrainz
 
     #
     # Represents a tag assigned to an entity.
-    # 
+    #
     # Tags are arbitrary labels assigned to entities by the users of MusicBrainz.
-    # 
+    #
     # See:: http://wiki.musicbrainz.org/FolksonomyTagging
     class Tag
       # The tag text.
@@ -22,17 +22,17 @@ module MusicBrainz
       # The tag count indicating how often the tag was used for the entity it's
       # assigned to.
       attr_accessor :count
-      
+
       def initialize(text=nil, count=nil)
         @text  = text
         @count = count
       end
-      
+
       # Convert this tag into a String. Will return text.
       def to_s
         return text.to_s
       end
-      
+
     end
 
   end

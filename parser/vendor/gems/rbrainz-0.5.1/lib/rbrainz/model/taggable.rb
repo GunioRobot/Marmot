@@ -15,13 +15,13 @@ module MusicBrainz
     #
     # see:: Tag
     module Taggable
-      
+
       # Returns a Collection of Tag objects assigned to this entity.
       def tags
         @tags ||= Collection.new
       end
-      
+
     end
-      
+
   end
 end

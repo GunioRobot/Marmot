@@ -18,7 +18,7 @@ class TestRating < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_rating
     rating = nil
     assert_nothing_raised {rating = Model::Rating.new}
@@ -31,16 +31,16 @@ class TestRating < Test::Unit::TestCase
     assert_equal '3.3', rating.to_s
     assert_equal 12, rating.count
     assert_equal false, rating.empty?
-    
+
     assert_nothing_raised {rating = Model::Rating.new(5)}
     assert_equal 5.0, rating.value
     assert_equal nil, rating.count
     assert_equal false, rating.empty?
-  
+
     assert_nothing_raised {rating = Model::Rating.new(1.0, 11)}
     assert_equal 1.0, rating.value
     assert_equal 11, rating.count
     assert_equal false, rating.empty?
   end
-  
+
 end

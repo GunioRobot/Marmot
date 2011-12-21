@@ -18,7 +18,7 @@ class TestArtistIncludes < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_includes
     includes = Webservice::ArtistIncludes.new(
       :aliases => true,
@@ -37,7 +37,7 @@ class TestArtistIncludes < Test::Unit::TestCase
       )
     result_string = includes.to_s
     assert_equal 'inc=', result_string[0..3]
-    
+
     result_array = result_string[4..-1].split(/%20|\+/)
     assert result_array.include?('aliases')
     assert result_array.include?('artist-rels')
@@ -52,7 +52,7 @@ class TestArtistIncludes < Test::Unit::TestCase
     assert result_array.include?('va-Official')
     assert result_array.include?('tags')
   end
-  
+
   def test_empty_includes
     includes = Webservice::ArtistIncludes.new(
       :aliases => false,
@@ -70,9 +70,9 @@ class TestArtistIncludes < Test::Unit::TestCase
       :user_ratings => false
       )
     assert_equal '', includes.to_s
-    
+
     includes = Webservice::ArtistIncludes.new({})
     assert_equal '', includes.to_s
   end
-  
+
 end

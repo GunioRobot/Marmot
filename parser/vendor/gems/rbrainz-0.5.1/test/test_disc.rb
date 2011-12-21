@@ -18,14 +18,14 @@ class TestDisc < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_new_disc
     disc = nil
     assert_nothing_raised {disc = Model::Disc.new}
     assert_nothing_raised {disc = Model::Disc.new('Tit3F0Do_sZ_7NbfM_1vlEbF0wo-')}
     assert_equal 'Tit3F0Do_sZ_7NbfM_1vlEbF0wo-', disc.id
   end
-  
+
   def test_id
     disc = Model::Disc.new
     assert disc.id.nil?
@@ -40,5 +40,5 @@ class TestDisc < Test::Unit::TestCase
     assert_nothing_raised {disc.sectors = 264432}
     assert_equal 264432, disc.sectors
   end
-  
+
 end

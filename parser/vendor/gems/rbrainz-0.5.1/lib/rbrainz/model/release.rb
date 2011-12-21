@@ -29,14 +29,14 @@ module MusicBrainz
     #        limited set of types. See http://wiki.musicbrainz.org/ReleaseAttribute
     #        for more information.
     class Release < Entity
-    
+
       include Rateable
       include Relateable
       include Taggable
-      
+
       # A type for not a type. Currently unsupported by MusicBrainz
       TYPE_NONE           = NS_MMD_1 + 'None'
-      
+
       # An album, perhaps better defined as a "Long Play" (LP) release,
       # generally consists of previously unreleased material. This includes
       # release re-issues, with or without bonus tracks.
@@ -68,7 +68,7 @@ module MusicBrainz
       # Any release that does not fit or can't decisively be placed in any of
       # the categories above.
       TYPE_OTHER          = NS_MMD_1 + 'Other'
-      
+
       # Any release officially sanctioned by the artist and/or their record
       # company. (Most releases will fit into this category.)
       TYPE_OFFICIAL       = NS_MMD_1 + 'Official'
@@ -82,10 +82,10 @@ module MusicBrainz
       # A pseudo-release is a duplicate release for translation/transliteration
       # purposes.
       TYPE_PSEUDO_RELEASE = NS_MMD_1 + 'PseudoRelease'
-      
+
       # See Entity::ENTITY_TYPE.
       ENTITY_TYPE = :release # :nodoc:
-      
+
       # The title of this release.
       attr_accessor :title
 
@@ -99,14 +99,14 @@ module MusicBrainz
       attr_accessor :artist
 
       # The language used in release and track titles.
-      # 
+      #
       # To represent the language, the ISO-639-2/T standard is used,
       # which provides three-letter terminological language codes like
       # 'ENG', 'DEU', 'JPN', 'KOR', 'ZHO' or 'YID'.
       #
       # Note that this refers to release and track <i>titles</i>, not
       # lyrics.
-      # 
+      #
       # See:: Utils#get_language_name
       attr_accessor :text_language
 
@@ -117,10 +117,10 @@ module MusicBrainz
       #
       # Note that this refers to release and track <i>titles</i>, not
       # lyrics.
-      # 
+      #
       # See:: Utils#get_script_name
       attr_accessor :text_script
-                    
+
       # The release group this release is part of.
       attr_accessor :release_group
 
@@ -145,7 +145,7 @@ module MusicBrainz
       # To test for release types, you can use the constants
       # TYPE_ALBUM, TYPE_SINGLE, etc.
       attr_reader :types
-      
+
       def initialize(id=nil, title=nil)
         super id
         self.title      = title
@@ -171,13 +171,13 @@ module MusicBrainz
           raise 'Release Artist may not be None!' unless artist
           tracks.all? {|track| !track.artist || track.artist.id == artist.id }
       end
-    
+
       # Returns the earliest release date as an IncompleteDate.
-      # 
+      #
       # This favours complete dates. For example, '2006-09' is
       # returned if there is '2000', too. If there is no release
       # event associated with this release, +nil+ is returned.
-      # 
+      #
       # See:: earliest_release_date
       def earliest_release_event
         earliest_event = nil
@@ -189,23 +189,23 @@ module MusicBrainz
         end
         return earliest_event
       end
-      
+
       # Returns the date of the earliest release event or +nil+.
-      # 
+      #
       # See:: earliest_release_event
       def earliest_release_date
         event = earliest_release_event
         event ? event.date : nil
       end
-    
+
       # Returns the string representation for this release.
-      # 
+      #
       # Returns #title converted into a string.
       def to_s
         title.to_s
       end
-            
+
     end
-    
-  end    
+
+  end
 end

@@ -1,21 +1,21 @@
 var crypto = require("./crypto");
   // Helpful link: https://github.com/waveto/node-crypto/blob/master/test.js
-  
+
 function Authenticate(key, iv) {
-  
+
   var encryption_key = key;
   var iv = iv;
   var cipher_type = "aes-256-cbc";
-  
+
   // Encrypts a string
   function encrypt(string){
     var cipher = new crypto.Cipher();
-    cipher.initiv(cipher_type, encryption_key, iv); 
+    cipher.initiv(cipher_type, encryption_key, iv);
     var ciph = cipher.update(string, 'utf8', 'hex');
     ciph += cipher.final('hex');
     return ciph;
   };
-  
+
   // Decrypts a string
   function decrypt(ciphered_password){
     var decipher = new crypto.Decipher();
@@ -24,13 +24,13 @@ function Authenticate(key, iv) {
     txt += decipher.final('utf8');
     return txt;
   };
-  
+
   // Exposes the API.
   return {
     encrypt: encrypt,
     decrypt: decrypt
   };
-  
+
 }
 
-module.exports = Authenticate;  
+module.exports = Authenticate;

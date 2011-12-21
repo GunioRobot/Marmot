@@ -10,7 +10,7 @@ require 'rbrainz/model/release'
 
 module MusicBrainz
   module Data
-  
+
     # See Utils#get_release_type_name
     RELEASE_TYPE_NAMES = {
     	Model::Release::TYPE_ALBUM          => 'Album',
@@ -26,7 +26,7 @@ module MusicBrainz
         Model::Release::TYPE_PROMOTION      => 'Promotion',
         Model::Release::TYPE_PSEUDO_RELEASE => 'Pseudo-Release',
         Model::Release::TYPE_REMIX          => 'Remix',
-        Model::Release::TYPE_SINGLE         => 'Single', 
+        Model::Release::TYPE_SINGLE         => 'Single',
         Model::Release::TYPE_SOUNDTRACK     => 'Soundtrack',
         Model::Release::TYPE_SPOKENWORD     => 'Spokenword'
     }

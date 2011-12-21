@@ -15,20 +15,20 @@ module MusicBrainz
     #
     # see:: Rating
     module Rateable
-      
+
       # The community Rating from MusicBrainz.
       def rating
         @rating ||= Rating.new
       end
       attr_writer :rating
-      
+
       # The user Rating from MusicBrainz.
       def user_rating
         @user_rating ||= Rating.new
       end
       attr_writer :user_rating
-      
+
     end
-      
+
   end
 end

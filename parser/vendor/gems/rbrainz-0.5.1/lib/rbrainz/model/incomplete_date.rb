@@ -14,11 +14,11 @@ module MusicBrainz
     # Represents an incomplete date. An incomplete date is a date which can be
     # defined without day or without month and day. It can be written as
     # <em>YYYY</em>, <em>YYYY-MM</em> or <em>YYYY-MM-DD</em>.
-    # 
+    #
     # An IncompleteDate is a Range of Date objects. The incomplete date
     # <em>1969-01</em> for example results in a range beginning on 1969-01-01
     # and ending on 1969-01-31, including the end.
-    # 
+    #
     # RBrainz extends the Ruby Range class with additional comparison methods.
     # See CoreExtensions::Range::Equality for a description of those methods.
     class IncompleteDate < ::Range
@@ -52,7 +52,7 @@ module MusicBrainz
 
       # Returns the incomplete date in its textual form
       # <em>YYYY</em>, <em>YYYY-MM</em> or <em>YYYY-MM-DD</em>.
-      # 
+      #
       # TODO: Allow formatting options similiar to Date.to_s
       def to_s
         date = @year.to_s
@@ -61,18 +61,18 @@ module MusicBrainz
         }
         return date
       end
-      
+
       # Compare two IncompleteDate objects for equality.
-      # 
+      #
       # You can compare an IncompleteDate with another IncompleteDate, with
       # a Range of Date objects or directly with a Date. The following examples
       # all return true:
-      # 
+      #
       #  IncompleteDate.new('1969-01-05').eql?( IncompleteDate.new('1969-01-05') )
       #  IncompleteDate.new('1969-01-05').eql?( Date.civil(1969, 1, 5) )
       #  IncompleteDate.new('1969-01').eql?( Date.civil(1969, 1)..Date.civil(1969, 1, 31) )
       #  IncompleteDate.new('1969-01').eql?( Date.civil(1969, 1)...Date.civil(1969, 2, 1) )
-      #  
+      #
       # Please note that comparing an IncompleteDate with something else than a
       # IncompleteDate is normally not symmetric.
       def eql?(b)
@@ -83,15 +83,15 @@ module MusicBrainz
         end
       end
       alias :== :eql?
-      
+
       # Returns true if b is completely included in this IncompleteDate. Unlike
       # CoreExtensions::Range::Equality#contains? include? allows equality for
       # begin and end.
       def include?(b)
         self.started_by?(b) || self.contains?(b) || self.eql?(b) || self.finished_by?(b)
       end
-      
+
     end
-    
-  end    
+
+  end
 end

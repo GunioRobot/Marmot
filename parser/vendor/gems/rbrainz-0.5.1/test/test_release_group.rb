@@ -19,7 +19,7 @@ class TestReleaseGroup < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   # Include the tests for Entity
   include TestEntity
 
@@ -27,7 +27,7 @@ class TestReleaseGroup < Test::Unit::TestCase
     release_group = nil
     assert_nothing_raised {release_group = Model::ReleaseGroup.new}
     assert release_group.is_a?(Model::Entity)
-    
+
     mbid = Model::MBID.new('a07cbaff-aa79-35a9-9932-af7335f306eb', :release_group)
     assert_nothing_raised {release_group = Model::ReleaseGroup.new(
       mbid,
@@ -36,7 +36,7 @@ class TestReleaseGroup < Test::Unit::TestCase
     assert_equal mbid, release_group.id
     assert_equal 'In Requiem', release_group.title
   end
-  
+
   def test_title
     release_group = Model::ReleaseGroup.new
     assert release_group.title.nil?
@@ -64,13 +64,13 @@ class TestReleaseGroup < Test::Unit::TestCase
                Model::ReleaseGroup::TYPE_OTHER,
                ]
     }
-    
+
     # Adding all those types should be possible.
     types.each {|type|
       assert_nothing_raised {release_group.types << type}
     }
     assert_equal 12, release_group.types.size
-    
+
     # Removing the types again
     types.each {|type|
       assert_nothing_raised {release_group.types.delete type}
@@ -85,7 +85,7 @@ class TestReleaseGroup < Test::Unit::TestCase
     assert_nothing_raised {release_group.artist = artist}
     assert_equal artist, release_group.artist
   end
-  
+
   # Many releases can be added
   def test_add_and_remove_releases
     release_group = Model::ReleaseGroup.new
@@ -94,11 +94,11 @@ class TestReleaseGroup < Test::Unit::TestCase
     assert_equal 1, release_group.releases.size
     assert_nothing_raised {release_group.releases << @releases[1]}
     assert_equal 2, release_group.releases.size
-    
+
     assert_nothing_raised {release_group.releases.delete @releases[1]}
     assert_equal 1, release_group.releases.size
     assert_nothing_raised {release_group.releases.delete @releases[0]}
     assert_equal 0, release_group.releases.size
   end
-  
+
 end

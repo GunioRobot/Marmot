@@ -5,7 +5,7 @@
 # Copyright:: Copyright (c) 2007, Nigel Graham, Philipp Wolfer
 # License::   RBrainz is free software distributed under a BSD style license.
 #             See LICENSE[file:../LICENSE.html] for permissions.
- 
+
 module MusicBrainz
   module Model
 
@@ -23,14 +23,14 @@ module MusicBrainz
     # TODO:: Add some examples.
     #
     class Relation
-    
+
       # Relation reading direction is from target to source.
       DIR_BACKWARD = :backward
       # Relation reading direction is from source to target.
       DIR_FORWARD  = :forward
       # Relation reading direction doesn't matter.
       DIR_BOTH     = :both
-      
+
       # Identifies relations linking to an artist.
       TO_ARTIST  = NS_REL_1 + 'Artist'
       # Identifies relations linking to a release.
@@ -41,10 +41,10 @@ module MusicBrainz
       TO_LABEL   = NS_REL_1 + 'Label'
       # Identifies relations linking to an URL.
       TO_URL     = NS_REL_1 + 'Url'
-      
+
       # The relation's type.
       attr_accessor :type
-      
+
       # The reading direction.
       #
       # The direction may be one of DIR_FORWARD, DIR_BACKWARD, or DIR_BOTH,
@@ -54,18 +54,18 @@ module MusicBrainz
       # bidirectional, like marriages. In these cases, the direction
       # is Relation.DIR_BOTH.
       attr_accessor :direction
-      
+
       # The relation's target object.
-      # 
+      #
       # The target can either be an object of the type Model::Entity
       # or a URL if the type of the relation is TO_URL.
       attr_reader :target
-      
+
       # The list of attributes describing this relation.
       #
       # The attributes permitted depend on the relation type.
       attr_reader :attributes
-      
+
       # The begin date.
       #
       # The definition depends on the relation's type. It may for
@@ -73,14 +73,14 @@ module MusicBrainz
       # joined a band. For other relation types this may be
       # undefined.
       attr_reader :begin_date
-      
+
       # The end date.
       #
       # As with the begin date, the definition depends on the
       # relation's type. Depending on the relation type, this may
       # or may not be defined.
       attr_reader :end_date
-      
+
       def initialize(type=nil, target=nil, direction=nil)
         @target        = nil
         @attributes    = Array.new
@@ -88,9 +88,9 @@ module MusicBrainz
         self.target    = target if target
         self.direction = direction
       end
-      
+
       # Set the target of this relation.
-      # 
+      #
       # The _target_ can either be an object of the type Model::Entity
       # or a URL if the type of the relation is TO_URL.
       def target=(target)
@@ -100,7 +100,7 @@ module MusicBrainz
           @target = target.to_s
         end
       end
-      
+
       # The type of target this relation points to.
       #
       # For MusicBrainz data, the following target types are defined:
@@ -123,11 +123,11 @@ module MusicBrainz
           end
         elsif not @target.nil?
           return TO_URL
-        end  
+        end
       end
-      
+
       # Set the begin date of this relation to _date_.
-      # 
+      #
       # Should be an IncompleteDate object or
       # a date string, which will get converted
       # into an IncompleteDate.
@@ -135,9 +135,9 @@ module MusicBrainz
         date = IncompleteDate.new date unless date.is_a? IncompleteDate or date.nil?
         @begin_date = date
       end
-      
+
       # Set the end date of this relation to _date_.
-      # 
+      #
       # Should be an IncompleteDate object or
       # a date string, which will get converted
       # into an IncompleteDate.
@@ -145,8 +145,8 @@ module MusicBrainz
         date = IncompleteDate.new date unless date.is_a? IncompleteDate or date.nil?
         @end_date = date
       end
-      
+
     end
-    
+
   end
 end

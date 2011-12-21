@@ -1,5 +1,5 @@
 class CouchRestRailsGenerator < Rails::Generator::Base
-  
+
   def manifest
     record do |m|
       m.directory "db/couch"

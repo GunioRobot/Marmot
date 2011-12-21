@@ -12,10 +12,10 @@ module MusicBrainz
   module Model
 
     # A label in the MusicBrainz DB.
-    # 
+    #
     # Labels in MusicBrainz can have a type. Currently, the following types
     # are supported
-    # 
+    #
     # - http://musicbrainz.org/ns/mmd-1.0#Unknown
     # - http://musicbrainz.org/ns/mmd-1.0#Distributor
     # - http://musicbrainz.org/ns/mmd-1.0#Holding
@@ -26,9 +26,9 @@ module MusicBrainz
     # See:: Individual
     # See:: http://musicbrainz.org/doc/Label.
     class Label < Individual
-    
+
       include Taggable
-      
+
       # Used if the type of the label is unknown.
       TYPE_UNKNOWN             = NS_MMD_1 + 'Unknown'
       # Companies mainly distributing other labels production,
@@ -45,24 +45,24 @@ module MusicBrainz
       TYPE_BOOTLEG_PRODUCTION  = NS_MMD_1 + 'BootlegProduction'
       # Labels specializing in catalog reissues.
       TYPE_REISSUE_PRODUCTION  = NS_MMD_1 + 'ReissueProduction'
-      
+
       # See Entity::ENTITY_TYPE.
       ENTITY_TYPE = :label # :nodoc:
-      
+
       # The code of the label.
-      # 
+      #
       # See:: http://musicbrainz.org/doc/LabelCode
       attr_accessor :code
-      
+
       # The country in which the company was founded.
       # A string containing a ISO 3166 country code like
       # 'GB', 'US' or 'DE'.
-      # 
+      #
       # See:: Utils#get_country_name
       # See:: http://musicbrainz.org/doc/LabelCountry
       attr_accessor :country
-      
+
     end
-    
+
   end
 end

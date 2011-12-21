@@ -1,7 +1,7 @@
 // Define the namespace...
 if (typeof app == 'undefined') { app = {}; }
 
-// Define the app.ajax namespace. 
+// Define the app.ajax namespace.
 // app.ajax = {};
 
 // Define the app.player namespace.
@@ -17,7 +17,7 @@ app.player = {};
     element_id = The element that received the data after the ajax call
 */
 // app.ajax.Link = function(click_id, element_id){
-//   $(click_id).live('click', function(event){   
+//   $(click_id).live('click', function(event){
 //     event.preventDefault();
 //     $(element_id).empty();
 //     var artist_name = $(this).attr("data-artistname");
@@ -32,26 +32,26 @@ app.player = {};
 //         $(element_id).html(data);
 //       }
 //     });
-//   }); 
-// }; 
-// 
-// app.ajax.VideoForArtist = function(artist_name){ 
+//   });
+// };
+//
+// app.ajax.VideoForArtist = function(artist_name){
 //   $.ajax({
 //     url: '/videos/'+artist_name,
 //     type: 'GET',
 //     success: function(data) {
-//       $('#artist_videos').html(data); 
+//       $('#artist_videos').html(data);
 //     },
 //     error: function(error) {
 //       console.log("Error getting artist videos");
 //       console.log(error);
 //     }
 //   });
-// };  
+// };
 
-                   
-/* All the functions for playing a track are in here. 
-  
+
+/* All the functions for playing a track are in here.
+
   Currently supports the following callbacks for HTML5 audio:
     * seeked - fires when a user is seeking through a track
     * ended - fires when the current track has ended
@@ -61,28 +61,28 @@ app.player.Play = function(){
   var audio_element = $('#player')[0];
   var current_playing_track_class = 'current_track_playing';
   var current_track;
-  
-  // an anonymous playSong method that takes an element. 
+
+  // an anonymous playSong method that takes an element.
   // Also sets the current_track var to the element
-  function playSong(element) { 
-    current_track = $(element); 
+  function playSong(element) {
+    current_track = $(element);
     highlightCurrentTrack(element);
     displayWhosPlaying(element);
-    audio_element.src = current_track.attr('href'); 
+    audio_element.src = current_track.attr('href');
     audio_element.autoplay = true;
     audio_element.preload = 'auto';
   };
-                 
-  // Removes the current_track_playing class 
+
+  // Removes the current_track_playing class
   function removeCurrentTrackClass(){
     $('.play_song').removeClass(current_playing_track_class);
   };
-  
+
   // Highlights the currently playing track
   function highlightCurrentTrack(element){
     $(element).addClass(current_playing_track_class);
   };
-  
+
   // Displays the current track playing
   function displayWhosPlaying(element){
     var artist = $(element).attr('data-artist');
@@ -92,49 +92,49 @@ app.player.Play = function(){
     var slug = $(element).attr('data-artistslug');
     $('#now_playing').html("<a data-artistname='"+artist+"' href='/#/show/" + slug + "' class='ajax_link' rel='"+ href +"'>" + artist + " / " + album + " / " + song + "</a>");
   };
-  
+
   // Clears the who's playing dom element
   function clearWhosPlaying(){
     $('#now_playing').empty();
   };
-  
+
   // Attach the click event to each .play_song attribute (i.e a track);
   $('.play_song').live('click', function(event){
     removeCurrentTrackClass();
-    event.preventDefault();    
+    event.preventDefault();
     playSong(this);
-  }); 
-  
+  });
+
   // 'seeked' callback
   audio_element.addEventListener('seeked',function(){
     audio_element.play();
-  });   
-  
+  });
+
   audio_element.addEventListener('play', function(){
     audio_element.play();
   });
-  
+
   // 'timeupdate' callback. Holds the current time of the track
   audio_element.addEventListener('timeupdate', function(){
     // "this.currentTime" holds the current time of the track
   });
-  
+
   // 'stop' callback. Fires when the track stopped playing
   audio_element.addEventListener('pause', function(){
     clearWhosPlaying();
-  });   
-  
-  audio_element.addEventListener('progress', function(){ 
+  });
+
+  audio_element.addEventListener('progress', function(){
 
   });
-  
+
   // 'ended' callback
   audio_element.addEventListener("ended", function(){
     removeCurrentTrackClass();
     var track_number = parseInt($(current_track).attr('rel'),10);
-    var next_track = track_number + 1;       
+    var next_track = track_number + 1;
     var next_track_element = $('.play_song[rel=' + next_track + ']');
-    
+
     // Check to see if we have a next track to play...
     if($(next_track_element).length == 1){
       playSong(next_track_element);
@@ -143,13 +143,13 @@ app.player.Play = function(){
       playSong($('.play_song[rel=0]'));
     }
   });
-       
+
 };
 
 $(document).ready(function() {
   // Sets up click events on the artists name using .ajax_link in the sidebar, and fills in the data in the #artist_info element
   // app.ajax.Link('.ajax_link', '#artist_info');
-  
+
   // Sets up the player on the artist's page
-  app.player.Play(); 
+  app.player.Play();
 });

@@ -27,11 +27,11 @@ class TestMBID < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_parse
     assert_equal 'http://musicbrainz.org/artist/9d30e408-1559-448b-b491-2f8de1583ccf',
-      Model::MBID.parse( 
-        'http://musicbrainz.org/artist/9d30e408-1559-448b-b491-2f8de1583ccf', 
+      Model::MBID.parse(
+        'http://musicbrainz.org/artist/9d30e408-1559-448b-b491-2f8de1583ccf',
         :artist).to_s
     assert_equal 'http://musicbrainz.org/artist/9d30e408-1559-448b-b491-2f8de1583ccf',
       Model::MBID.parse(
@@ -44,7 +44,7 @@ class TestMBID < Test::Unit::TestCase
     }
     assert_equal Model::VARIOUS_ARTISTS_ID, Model::MBID.parse('http://musicbrainz.org/artist/89ad4ac3-39f7-470e-963a-56509c546377')
   end
-  
+
   def test_from_uri
     @valid_entities.each{|entity|
       @valid_uuids.each{|uuid|
@@ -56,7 +56,7 @@ class TestMBID < Test::Unit::TestCase
       assert_raise(Model::InvalidMBIDError, uri) {Model::MBID.parse uri}
     }
   end
-  
+
   def test_from_uuid
     @valid_entities.each{|entity|
       @valid_uuids.each{|uuid|
@@ -72,7 +72,7 @@ class TestMBID < Test::Unit::TestCase
         {Model::MBID.parse uuid, @valid_entities[0]}
     }
   end
-  
+
   def test_to_s
     @valid_entities.each{|entity|
       @valid_uuids.each{|uuid|
@@ -84,7 +84,7 @@ class TestMBID < Test::Unit::TestCase
       }
     }
   end
-  
+
   def test_read_attributes
     @valid_entities.each{|entity|
       @valid_uuids.each{|uuid|
@@ -97,19 +97,19 @@ class TestMBID < Test::Unit::TestCase
       }
     }
   end
-  
+
   # Test if the attributes are read only.
   def test_write_attributes
     mbid = Model::MBID.parse @valid_uuids[0], @valid_entities[0]
     assert_raise(NoMethodError) {mbid.entity = :release}
     assert_raise(NoMethodError) {mbid.uuid = @valid_uuids[0]}
   end
-  
+
   def test_equality
     mbid1 = Model::MBID.parse @valid_uuids[0], @valid_entities[0]
     mbid2 = Model::MBID.parse @valid_uuids[0], @valid_entities[0]
     assert_equal mbid1, mbid1
     assert_equal mbid1, mbid2
   end
-  
+
 end

@@ -28,7 +28,7 @@ class MyAlias < Model::Alias
 end
 
 # An alternative model factory for testing purposes.
-class MyFactory < Model::DefaultFactory 
+class MyFactory < Model::DefaultFactory
 
   def new_artist
     MyArtist.new

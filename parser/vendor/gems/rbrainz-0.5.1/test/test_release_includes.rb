@@ -18,7 +18,7 @@ class TestReleaseIncludes < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_includes
     includes = Webservice::ReleaseIncludes.new(
       :artist => true,
@@ -42,7 +42,7 @@ class TestReleaseIncludes < Test::Unit::TestCase
       )
     result_string = includes.to_s
     assert_equal 'inc=', result_string[0..3]
-    
+
     result_array = result_string[4..-1].split(/%20|\+/)
     assert result_array.include?('artist')
     assert result_array.include?('counts')
@@ -60,7 +60,7 @@ class TestReleaseIncludes < Test::Unit::TestCase
     assert result_array.include?('track-level-rels')
     assert result_array.include?('tags')
   end
-  
+
   def test_empty_includes
     includes = Webservice::ReleaseIncludes.new(
       :artist => false,
@@ -83,9 +83,9 @@ class TestReleaseIncludes < Test::Unit::TestCase
       :user_ratings => false
       )
     assert_equal '', includes.to_s
-  
+
     includes = Webservice::ReleaseIncludes.new({})
     assert_equal '', includes.to_s
   end
-  
+
 end

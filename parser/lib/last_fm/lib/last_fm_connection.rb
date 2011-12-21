@@ -7,7 +7,7 @@ module LastFm
 			@url = url
 			@tries = 1
 		end
-		
+
 		# Gets the response body of the URL that's passed into the initialize method.
 		def call_service
 			# puts "Getting: #{self.url}"
@@ -18,10 +18,10 @@ module LastFm
 		rescue Exception => e
 			retry_service(e)
 		end
-		
-		
+
+
 		private
-		
+
 		# A little error handling helper that retries the service 10 times
 		def retry_service(e) # e == rescued error
 			if self.tries <= 10
@@ -34,6 +34,6 @@ module LastFm
 				puts "BIG TIME ERROR getting: #{self.url}"
 			end
 		end
-		
+
 	end
 end

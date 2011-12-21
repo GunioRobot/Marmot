@@ -18,7 +18,7 @@ module MusicBrainz
 
     # A factory to create model classes.
     class DefaultFactory
-      
+
       # Creates a new entity for a given entity type (<tt>:artist</tt>,
       # <tt>:label</tt>, <tt>:release</tt> or <tt>:track</tt>).
       def new_entity(entity_type)
@@ -35,56 +35,56 @@ module MusicBrainz
             new_track
         end
       end
-      
+
       def new_artist
         Artist.new
       end
-      
+
       def new_label
         Label.new
       end
-      
+
       def new_release_group
         ReleaseGroup.new
       end
-      
+
       def new_release
         Release.new
       end
-      
+
       def new_track
         Track.new
       end
-      
+
       def new_alias
         Alias.new
       end
-      
+
       def new_disc
         Disc.new
       end
-      
+
       def new_relation
         Relation.new
       end
-      
+
       def new_release_event
         ReleaseEvent.new
       end
-      
+
       def new_tag
         Tag.new
       end
-      
+
       def new_rating
         Rating.new
       end
-      
+
       def new_user
         User.new
       end
-      
+
     end
-    
+
   end
 end

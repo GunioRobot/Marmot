@@ -57,11 +57,11 @@ var detectBrowserType = exports.detectBrowserType = function (options) {
                 break;
             }
         };
-        
+
         request.monomi = {
           'browserType' : browserType
         };
-        
+
         next();
 
     };

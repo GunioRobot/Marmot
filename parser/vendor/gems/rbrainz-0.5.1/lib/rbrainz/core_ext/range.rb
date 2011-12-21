@@ -12,5 +12,5 @@ class Range  #:nodoc:
 
   # Extend Range with additional comparison operations.
   include MusicBrainz::CoreExtensions::Range::Equality
-  
+
 end

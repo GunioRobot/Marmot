@@ -8,7 +8,7 @@
 
 module MusicBrainz
   module Data
-  
+
     # See Utils#get_country_name
     COUNTRY_NAMES = {
     	'BD' => 'Bangladesh',

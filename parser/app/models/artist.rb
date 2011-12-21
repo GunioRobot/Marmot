@@ -1,5 +1,5 @@
-# The Artist class inherits from <tt>CouchRestRails::Document</tt>. 
-# 
+# The Artist class inherits from <tt>CouchRestRails::Document</tt>.
+#
 # ==== What is an Artist?
 # At the highest level, an artist is just a name. An artist has many albums and an artist has many songs. There is a relationship
 # between albums and songs, but please see the Album and Song class to learn more about them.
@@ -9,7 +9,7 @@
 #
 # To find an artist by name:
 #   Artist.by_name(:name => 'Tool').first
-# 
+#
 # To create an artist, a related album and some songs.
 #   pink_floyd = Artist.new({:name => "Pink Floyd", :about_short => "", :about_long => "", :albums => [], :artist_images => []})
 #   pink_floyd.albums << Album.create({:name => "The Wall", :summary => "The Wall is pretty sweet", :songs => []})
@@ -17,7 +17,7 @@
 #   pink_floyd.albums.first.songs << Song.create({:name => "The thin ice", :track_number => "2"})
 #   pink_floyd.albums.first.songs << Song.create({:name => "Another Brick in the Wall Pt 1", :track_number => "3"})
 #   pink_floyd.save
-#   pink_floyd.get_external_artist_info({:artist_info => true, :artist_images => true}) 
+#   pink_floyd.get_external_artist_info({:artist_info => true, :artist_images => true})
 #
 # The code above will create a couchdb json structure like so:
 # {
@@ -80,19 +80,19 @@
 #
 
 class Artist < CouchRestRails::Document
-	
+
 	# A module that consists of common callbacks for the Artist, Album and Song classes
 	include CouchDbCallbacks
-	
+
 	# The LastFm module is responsible for collecting data from last.fm's web services. http://www.last.fm/api
 	# include LastFm
-	
+
 	# Tell CouchDB to use the artist database
   use_database :artist
 
 	# The ID will be the band name in sanitized slug form
 	unique_id :slug
-	
+
 	# The properties (attributes) that describe an Artist
   property :name
   property :about_short
@@ -105,23 +105,23 @@ class Artist < CouchRestRails::Document
 	# CouchDB views
   view_by :name, :descending => true
 	view_by :slug, :descending => true
-	
-	view_by :albums, 
+
+	view_by :albums,
 					:map => "
 function(doc) {
 	if(doc['albums']){
 		emit(doc['name'], doc['albums']);
 	}
 }"
-	
+
 	# Validations
   validates_presence_of :name
 
 	# Callbacks
 	set_callback :save, :before, :generate_slug_from_name
-		
+
 	class << self
-		
+
 		# Returns either a new artist, or an artist already in CouchDB
 		# Options are:
 		#
@@ -130,42 +130,42 @@ function(doc) {
 		#
 		# If the artist can't be found, a new one will be created and a call to last.fm for artist info is performed.
 		def find_or_create_artist(opts={})
-			
+
 			pull_metadata = opts[:pull_metadata].nil? ? true : opts[:pull_metadata]
-			
+
 			artist = Artist.by_name({:key => opts[:name]}).first
 			if artist.nil?
 				ar = Artist.create({
-					:name => opts[:name], 
-					:about_short => "", 
-					:about_long => "", 
-					:albums => [], 
+					:name => opts[:name],
+					:about_short => "",
+					:about_long => "",
+					:albums => [],
 					:artist_images => []
 				})
-				
+
 				# Pull artist info from last.fm
 				if pull_metadata == true
-					ar.get_external_artist_info({:artist_info => true, :artist_images => true}) 
+					ar.get_external_artist_info({:artist_info => true, :artist_images => true})
 				end
-				
+
 				return ar
 			else
 				artist
 			end
 		end
-	end	
-		
-		
+	end
+
+
 	# Returns the artist data from last.fm for 'self' artist based on name
 	# Options are:
   #
   # * <tt>:artist_info</tt> - If set to 'true', artist info will be queried from last.fm.
 	# * <tt>:artist_images</tt> - If set to 'true', artist images will be queried from last.fm.
 	# * <tt>:similar_artists</tt> - If set to 'true', similar artists will be queried from last.fm.
-	# 
+	#
 	# TODO = get_external_artist_info needs to be refactored. Everything is lumped together to see exactly what needs refactoring in the future. A pattern should evolve sooner or later.
 	def get_external_artist_info(opts={})
-		
+
 		# Get the artist's info if opts[:artist_info] == true
 		if opts[:artist_info] == true
 			artist_info = LastFm::LastFmArtistInfo.new(:artist_name => self.name)
@@ -173,11 +173,11 @@ function(doc) {
 			self['about_long'] = artist_info.content
 			self.save
 		end
-		
+
 		# Get the artist's images if opts[:artist_images] == true
 		if opts[:artist_images] == true
 			artist_images = LastFm::LastFmArtistImage.new(:artist_name => self.name)
-			
+
 			self.artist_image_sizes.each do |size|
 				begin
 					self.artist_images << ArtistImage.create({
@@ -192,16 +192,16 @@ function(doc) {
 				end
 			end
 		end
-		
+
 	end
-	
+
 	protected
-	
+
 	# Image size names specific to last.fm's naming convention.
 	#
 	# TODO = Do not like hardcoding the image sizes. Figure out a better way!
 	def artist_image_sizes
 		%w{ original large largesquare medium small }
 	end
-		
+
 end

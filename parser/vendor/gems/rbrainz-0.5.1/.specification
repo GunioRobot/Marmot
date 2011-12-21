@@ -1,17 +1,17 @@
---- !ruby/object:Gem::Specification 
+--- !ruby/object:Gem::Specification
 name: rbrainz
-version: !ruby/object:Gem::Version 
+version: !ruby/object:Gem::Version
   version: 0.5.1
 platform: ruby
-authors: 
+authors:
 - Philipp Wolfer
 - Nigel Graham
-autorequire: 
+autorequire:
 bindir: bin
 cert_chain: []
 
 date: 2009-08-03 00:00:00 -05:00
-default_executable: 
+default_executable:
 dependencies: []
 
 description: RBrainz is a Ruby client library to access the MusicBrainz XML web service. RBrainz supports the MusicBrainz XML Metadata Version 1.2, including support for labels and extended release events.  RBrainz follows the design of python-musicbrainz2, the reference implementation for a MusicBrainz client library. Developers used to python-musicbrainz2 should already know most of RBrainz' interface. However, RBrainz differs from python-musicbrainz2 wherever it makes the library more Ruby like or easier to use.
@@ -20,12 +20,12 @@ executables: []
 
 extensions: []
 
-extra_rdoc_files: 
+extra_rdoc_files:
 - doc/README.rdoc
 - LICENSE
 - TODO
 - CHANGES
-files: 
+files:
 - Rakefile
 - LICENSE
 - README
@@ -189,28 +189,28 @@ has_rdoc: true
 homepage: http://rbrainz.rubyforge.org
 licenses: []
 
-post_install_message: 
+post_install_message:
 rdoc_options: []
 
-require_paths: 
+require_paths:
 - lib
-required_ruby_version: !ruby/object:Gem::Requirement 
-  requirements: 
+required_ruby_version: !ruby/object:Gem::Requirement
+  requirements:
   - - ">="
-    - !ruby/object:Gem::Version 
+    - !ruby/object:Gem::Version
       version: "0"
-  version: 
-required_rubygems_version: !ruby/object:Gem::Requirement 
-  requirements: 
+  version:
+required_rubygems_version: !ruby/object:Gem::Requirement
+  requirements:
   - - ">="
-    - !ruby/object:Gem::Version 
+    - !ruby/object:Gem::Version
       version: "0"
-  version: 
-requirements: 
+  version:
+requirements:
 - "Optional: mb-discid >= 0.1.2 (for calculating disc IDs)"
 rubyforge_project: rbrainz
 rubygems_version: 1.3.5
-signing_key: 
+signing_key:
 specification_version: 2
 summary: Ruby library for the MusicBrainz XML web service.
 test_files: []

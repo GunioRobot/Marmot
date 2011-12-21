@@ -8,7 +8,7 @@ var cipher_type = "aes-256-cbc";
 
 function encrypt(string){
 	var cipher = new crypto.Cipher();
-	cipher.initiv(cipher_type, encryption_key, iv);	
+	cipher.initiv(cipher_type, encryption_key, iv);
 	var ciph = cipher.update(string, 'utf8', 'hex');
 	ciph += cipher.final('hex');
 	return ciph;

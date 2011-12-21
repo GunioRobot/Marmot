@@ -24,7 +24,7 @@ class TestArtist < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   # Include the tests for Entity
   include TestEntity
   include TestRateable
@@ -35,7 +35,7 @@ class TestArtist < Test::Unit::TestCase
     artist = nil
     assert_nothing_raised {artist = Model::Artist.new}
     assert artist.is_a?(Model::Entity)
-    
+
     mbid = Model::MBID.new('9d30e408-1559-448b-b491-2f8de1583ccf', artist.entity_type)
     assert_nothing_raised {artist = Model::Artist.new(
       mbid,
@@ -48,28 +48,28 @@ class TestArtist < Test::Unit::TestCase
     assert_equal 'The White Stripes', artist.name
     assert_equal 'White Stripes, The', artist.sort_name
   end
-  
+
   def test_name
     artist = Model::Artist.new
     assert artist.name.nil?
     assert_nothing_raised {artist.name = 'Paradise Lost'}
     assert_equal 'Paradise Lost', artist.name
   end
-  
+
   def test_sort_name
     artist = Model::Artist.new
     assert artist.sort_name.nil?
     assert_nothing_raised {artist.sort_name = 'Paradise Lost'}
     assert_equal 'Paradise Lost', artist.sort_name
   end
-  
+
   def test_disambiguation
     artist = Model::Artist.new
     assert artist.disambiguation.nil?
     assert_nothing_raised {artist.disambiguation = 'Disambiguation comment'}
     assert_equal 'Disambiguation comment', artist.disambiguation
   end
-  
+
   def test_unique_name
     artist = Model::Artist.new
     artist.name = 'Paradise Lost'
@@ -77,7 +77,7 @@ class TestArtist < Test::Unit::TestCase
     assert_equal 'Paradise Lost (British metal / hard rock band)', artist.unique_name
     assert_equal 'Paradise Lost (British metal / hard rock band)', artist.to_s
   end
-  
+
   def test_type
     artist = Model::Artist.new
     assert artist.type.nil?
@@ -94,7 +94,7 @@ class TestArtist < Test::Unit::TestCase
     assert_equal nil, artist.begin_date
     assert_nothing_raised {artist.begin_date = date}
     assert_equal date, artist.begin_date
-    
+
     # It should be able to supply a date as a string,
     # but Artist should convert it to an IncompleteDate.
     assert_nothing_raised {artist.begin_date = '1988-04-20'}
@@ -108,7 +108,7 @@ class TestArtist < Test::Unit::TestCase
     assert_equal nil, artist.end_date
     assert_nothing_raised {artist.end_date = date}
     assert_equal date, artist.end_date
-    
+
     # It should be able to supply a date as a string,
     # but Artist should convert it to an IncompleteDate.
     assert_nothing_raised {artist.end_date = '1988-04-20'}
@@ -122,13 +122,13 @@ class TestArtist < Test::Unit::TestCase
     assert_equal 1, artist.release_groups.size
     assert_nothing_raised {artist.release_groups << @release_groups[1]}
     assert_equal 2, artist.release_groups.size
-    
+
     assert_nothing_raised {artist.release_groups.delete @release_groups[1]}
     assert_equal 1, artist.release_groups.size
     assert_nothing_raised {artist.release_groups.delete @release_groups[0]}
     assert_equal 0, artist.release_groups.size
   end
-  
+
   # Many releases can be added
   def test_add_and_remove_releases
     artist = Model::Artist.new
@@ -137,13 +137,13 @@ class TestArtist < Test::Unit::TestCase
     assert_equal 1, artist.releases.size
     assert_nothing_raised {artist.releases << @releases[1]}
     assert_equal 2, artist.releases.size
-    
+
     assert_nothing_raised {artist.releases.delete @releases[1]}
     assert_equal 1, artist.releases.size
     assert_nothing_raised {artist.releases.delete @releases[0]}
     assert_equal 0, artist.releases.size
   end
-  
+
   # Many aliases can be added
   def test_add_and_remove_aliases
     artist = Model::Artist.new
@@ -152,11 +152,11 @@ class TestArtist < Test::Unit::TestCase
     assert_equal 1, artist.aliases.size
     assert_nothing_raised {artist.aliases << @aliases[1]}
     assert_equal 2, artist.aliases.size
-    
+
     assert_nothing_raised {artist.aliases.delete @aliases[1]}
     assert_equal 1, artist.aliases.size
     assert_nothing_raised {artist.aliases.delete @aliases[0]}
     assert_equal 0, artist.aliases.size
   end
-  
+
 end

@@ -15,5 +15,5 @@
   database which will serve as a useful example for RBrainz.
 * Support for common extensions (this could be implemented by adding
   additional extension libraries which extend the existing classes).
-  
+
 $Id: TODO 277 2009-05-25 19:33:26Z phw $

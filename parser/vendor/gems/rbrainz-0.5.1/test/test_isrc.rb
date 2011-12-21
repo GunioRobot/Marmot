@@ -22,7 +22,7 @@ class TestISRC < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_parse_valid_raw_isrc
     isrc = nil
     assert_nothing_raised {isrc = Model::ISRC.parse(@valid_raw_isrc)}
@@ -49,13 +49,13 @@ class TestISRC < Test::Unit::TestCase
     assert_equal '73', isrc.year
     assert_equal '00012', isrc.designation
   end
-  
+
   def test_parse_invalid_isrc
     @invalid_isrcs.each do |isrc|
       assert_raise(Model::InvalidISRCError) { Model::ISRC.parse(isrc) }
     end
   end
-  
+
   def test_isrc_to_readable_string
     isrc = Model::ISRC.parse(@valid_raw_isrc)
     assert_equal @valid_printable_isrc, isrc.to_s
@@ -64,7 +64,7 @@ class TestISRC < Test::Unit::TestCase
     isrc = Model::ISRC.parse(@valid_printable_isrc.downcase)
     assert_equal @valid_printable_isrc, isrc.to_s
   end
-  
+
   def test_isrc_to_string
     isrc = Model::ISRC.parse(@valid_raw_isrc)
     assert_equal @valid_raw_isrc, isrc.to_str
@@ -73,7 +73,7 @@ class TestISRC < Test::Unit::TestCase
     isrc = Model::ISRC.parse(@valid_printable_isrc.downcase)
     assert_equal @valid_raw_isrc, isrc.to_str
   end
-  
+
   def test_isrc_equality
     isrc1 = Model::ISRC.parse(@valid_raw_isrc)
     isrc2 = Model::ISRC.parse(@valid_printable_isrc)
@@ -83,5 +83,5 @@ class TestISRC < Test::Unit::TestCase
     assert_equal isrc1, @valid_printable_isrc
     assert_equal isrc2, @valid_printable_isrc
   end
-  
+
 end

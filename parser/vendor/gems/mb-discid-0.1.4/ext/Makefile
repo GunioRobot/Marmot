@@ -40,15 +40,15 @@ LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
 LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
 LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static
 
-RUBY_EXTCONF_H = 
-CFLAGS   =  -fno-common -D_XOPEN_SOURCE=1  -fno-common -pipe -fno-common 
+RUBY_EXTCONF_H =
+CFLAGS   =  -fno-common -D_XOPEN_SOURCE=1  -fno-common -pipe -fno-common
 INCFLAGS = -I. -I. -I/usr/local/lib/ruby/1.8/i686-darwin9.3.0 -I.
-CPPFLAGS =  
-CXXFLAGS = $(CFLAGS) 
-DLDFLAGS = -L.   
+CPPFLAGS =
+CXXFLAGS = $(CFLAGS)
+DLDFLAGS = -L.
 LDSHARED = cc -dynamic -bundle -undefined suppress -flat_namespace
 AR = ar
-EXEEXT = 
+EXEEXT =
 
 RUBY_INSTALL_NAME = ruby
 RUBY_SO_NAME = ruby
@@ -66,26 +66,26 @@ COPY = cp
 
 #### End of system configuration section. ####
 
-preload = 
+preload =
 
 libpath = . $(libdir)
 LIBPATH =  -L"." -L"$(libdir)"
-DEFFILE = 
+DEFFILE =
 
 CLEANFILES = mkmf.log
-DISTCLEANFILES = 
+DISTCLEANFILES =
 
-extout = 
-extout_prefix = 
-target_prefix = 
-LOCAL_LIBS = 
-LIBS = $(LIBRUBYARG_SHARED) -ldiscid  -lpthread -ldl -lobjc  
+extout =
+extout_prefix =
+target_prefix =
+LOCAL_LIBS =
+LIBS = $(LIBRUBYARG_SHARED) -ldiscid  -lpthread -ldl -lobjc
 SRCS = mb_discid.c
 OBJS = mb_discid.o
 TARGET = MB_DiscID
 DLLIB = $(TARGET).bundle
-EXTSTATIC = 
-STATIC_LIB = 
+EXTSTATIC =
+STATIC_LIB =
 
 RUBYCOMMONDIR = $(sitedir)$(target_prefix)
 RUBYLIBDIR = /Users/dave/projects/popcorn/vendor/gems/mb-discid-0.1.4/lib$(target_prefix)

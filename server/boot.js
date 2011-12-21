@@ -13,10 +13,10 @@ eval(fs.readFileSync('config.js').toString());
 
 
 // Requires
-var express = require('express'); 
-var sys = require("sys");   
-var connect = require('connect'); 
-// var Monomi = require("./lib/browser_type"); 
+var express = require('express');
+var sys = require("sys");
+var connect = require('connect');
+// var Monomi = require("./lib/browser_type");
 // var fugue = require('fugue');
 var _ = require('underscore');
 var CouchClient = require('couch-client');
@@ -35,15 +35,15 @@ var user = User(auth);
 var app = express.createServer();
 app.use(express.bodyDecoder());
 // app.use(Monomi.detectBrowserType());
-app.use(connect.logger()); // For some reason, the logger has to be first... 
+app.use(connect.logger()); // For some reason, the logger has to be first...
 app.use(express.cookieDecoder());
 app.use(express.session({key: 'song_listing'}));
 app.use(app.router);
 app.use(express.methodOverride());
 app.use(express.staticProvider(__dirname + '/public'));
-app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));            
+app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 app.set('views');
-app.set('view engine','ejs');      
+app.set('view engine','ejs');
 
 // GET: Root path. Shows all the artists.
 app.get('/', function(req, res){
@@ -52,8 +52,8 @@ app.get('/', function(req, res){
       res.render('index.ejs', {
         locals: {songs: doc.rows}
       });
-    }); 
-  }));    
+    });
+  }));
 });
 
 // GET: Shows a particular artist based on the artist slug
@@ -75,9 +75,9 @@ app.get('/artists/:id', function(req,res){
          locals: {artist: artist, songs: songs},
          layout: false
       });
-    });   
+    });
   }));
-}); 
+});
 
 // GET: Plays a song based on the given song slug
 app.get('/play/:song_slug', function(req, res){
@@ -85,22 +85,22 @@ app.get('/play/:song_slug', function(req, res){
     Songs.view('/artist_development/'+req.params.song_slug, {}, function(err, doc){
       var song = doc;
       res.sendfile(song.file_path);
-    });      
+    });
   }));
 });
- 
+
 // GET: Gets a bunch of videos for the given :id (which is the artist slug)
 app.get('/videos/:id', function(req,res){
-  if(isLoggedIn(req, res, function(result){   
+  if(isLoggedIn(req, res, function(result){
     Songs.view('/artist_development/_design/Artist/_view/by_slug', {key: req.params.id}, function(err,doc){
-      var artist = doc.rows[0].value;  
+      var artist = doc.rows[0].value;
       youtube.searchForVideo(escape(artist.name), function(videos){
         res.render('videos', {
            locals: {videos: videos},
            layout: false
-        });      
+        });
       });
-    });    
+    });
   }));
 });
 
@@ -113,22 +113,22 @@ app.get('/register', function(req, res){
 
 // POST: Save registration
 // TODO: Add error handling
-app.post('/register', function(req,res){  
+app.post('/register', function(req,res){
   user.create(req, function(status, result){
     if(status){
-      req.session.db_id = result._id;   
+      req.session.db_id = result._id;
       res.redirect('/');
     }else{
       res.render('register.ejs', {
         layout: 'minimal',
         locals: {errors: result}
-      });      
+      });
     }
   });
 });
 
 // GET: Shows the login page
-app.get('/login', function(req,res){ 
+app.get('/login', function(req,res){
   res.render('login.ejs', {layout: 'minimal'});
 });
 
@@ -136,16 +136,16 @@ app.get('/login', function(req,res){
 // TODO: Add error handling
 app.post('/login',function(req, res){
   user.login(req, function(user){
-    if(user){       
-      req.session.db_id = user.id;   
+    if(user){
+      req.session.db_id = user.id;
       res.redirect('/');
     }else{
       res.render('login.ejs',{
         layout: 'minimal'
       });
     };
-  });  
-});  
+  });
+});
 
 // GET: Logs someone out
 app.get('/logout', function(req,res){
@@ -158,10 +158,10 @@ app.get('/logout', function(req,res){
 
 // App helpers
 app.helpers({
-  
+
   // Returns the square thumbnail image for an album. Pass in an Artist couchdb object
   squareAlbumImage: function(artist){ return artist.artist_images[2].image_url;},
-  
+
   // link helpers
   artistLink: function(song){ return ("/artists#"+escape(song.key));}
 });
@@ -175,10 +175,10 @@ var isLoggedIn = function(req, res, callback){
       req.session.redirect_to = res.url;
       res.redirect('/login');
     };
-  });  
+  });
 };
 
 
-app.listen(8080);   
+app.listen(8080);
 
 // fugue.start(app, 8080, null, 2, {verbose : true});

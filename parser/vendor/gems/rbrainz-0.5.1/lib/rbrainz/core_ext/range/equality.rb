@@ -9,18 +9,18 @@
 module MusicBrainz
   module CoreExtensions # :nodoc:
     module Range #:nodoc:
-    
+
       ##
       # Mixin module with equality operations for ranges.
-      # The built-in Range class is currently missing functions to compare a 
+      # The built-in Range class is currently missing functions to compare a
       # Range with another Range. There exist 13 disjoint equality operations for ranges.
       # This mixin implements them all and a few extra operations for commonly used combinations.
       #
       module Equality
-      
+
         # <tt>a.before?(b)</tt> is true, if _a_ ends before the beginning of _b_.
         # Same as <tt>b.after?(a)</tt>.
-        # 
+        #
         #  |A------|
         #            |B------|
         def before?(b)
@@ -34,7 +34,7 @@ module MusicBrainz
 
         # <tt>a.after?(b)</tt> is true, if _a_ begins after the end of _b_.
         # Same as <tt>b.before?(a)</tt>.
-        # 
+        #
         #            |A------|
         #  |B------|
         def after?(b)
@@ -62,7 +62,7 @@ Allready exists in Range so we can't define it in the module
 
         # <tt>a.meets_beginning_of?(b)</tt> is true, if _b_ begins exactly at the end of _a_.
         # Same as <tt>b.meets_end_of?(a)</tt>.
-        # 
+        #
         #  |A------|
         #          |B------|
         def meets_beginning_of?(b)
@@ -75,7 +75,7 @@ Allready exists in Range so we can't define it in the module
 
         # <tt>a.meets_end_of?(b)</tt> is true, if _b_ ends exactly at the beginning of _a_.
         # Same as <tt>b.meets_beginning_of?(a)</tt>.
-        # 
+        #
         #          |A------|
         #  |B------|
         def meets_end_of?(b)
@@ -88,7 +88,7 @@ Allready exists in Range so we can't define it in the module
 
         # <tt>a.overlaps_beginning_of?(b)</tt> is true, if _a_ overlaps the beginning of _b_.
         # Same as <tt>b.overlaps_end_of?(a)</tt>.
-        # 
+        #
         #  |A------|
         #       |B------|
         def overlaps_beginning_of?(b)
@@ -101,7 +101,7 @@ Allready exists in Range so we can't define it in the module
 
         # <tt>a.overlaps_end_of?(b)</tt> is true, if _a_ overlaps the end of _b_.
         # Same as <tt>b.overlaps_beginning_of?(a)</tt>.
-        # 
+        #
         #       |A------|
         #  |B------|
         def overlaps_end_of?(b)
@@ -114,7 +114,7 @@ Allready exists in Range so we can't define it in the module
 
         # <tt>a.during?(b)</tt> is true, if _a_ fits completely into _b_.
         # Same as <tt>b.contains?(a)</tt>.
-        # 
+        #
         #     |A------|
         #  |B------------|
         def during?(b)
@@ -127,7 +127,7 @@ Allready exists in Range so we can't define it in the module
 
         # <tt>a.contains?(b)</tt> is true, if _b_ fits completely into _a_.
         # Same as <tt>b.during?(a)</tt>.
-        # 
+        #
         #  |A------------|
         #     |B------|
         def contains?(b)
@@ -141,7 +141,7 @@ Allready exists in Range so we can't define it in the module
         # <tt>a.starts?(b)</tt> is true, if _a_ and _b_ have the same beginning
         # but _b_ lasts longer than _a_.
         # Same as <tt>b.started_by?(a)</tt>.
-        # 
+        #
         #  |A------|
         #  |B-----------|
         def starts?(b)
@@ -155,7 +155,7 @@ Allready exists in Range so we can't define it in the module
         # <tt>a.started_by?(b)</tt> is true, if _a_ and _b_ have the same
         # beginning but _a_ lasts longer than _b_.
         # Same as <tt>b.starts?(a)</tt>.
-        # 
+        #
         #  |A-----------|
         #  |B------|
         def started_by?(b)
@@ -169,7 +169,7 @@ Allready exists in Range so we can't define it in the module
         # <tt>a.finishes?(b)</tt> is true, if _a_ and _b_ have the same
         # end but _a_ begins after _b_.
         # Same as <tt>b.finished_by?(a)</tt>.
-        # 
+        #
         #       |A------|
         #  |B-----------|
         def finishes?(b)
@@ -183,7 +183,7 @@ Allready exists in Range so we can't define it in the module
         # <tt>a.finished_by?(b)</tt> is true, if _a_ and _b_ have the same
         # end but _b_ begins after _a_.
         # Same as <tt>b.finishes?(a)</tt>.
-        # 
+        #
         #  |A-----------|
         #       |B------|
         def finished_by?(b)

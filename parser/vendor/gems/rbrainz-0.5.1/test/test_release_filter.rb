@@ -35,12 +35,12 @@ class TestReleaseFilter < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_filter
     filter = Webservice::ReleaseFilter.new(@filter_hash)
     filter_string = filter.to_s
     assert_not_equal '&', filter_string[0]
-    
+
     result_hash = query_string_to_hash filter_string
     assert_equal @filter_hash[:title], result_hash['title'], filter_string
     assert_equal @filter_hash[:discid], result_hash['discid'], filter_string
@@ -57,29 +57,29 @@ class TestReleaseFilter < Test::Unit::TestCase
     assert_equal @filter_hash[:offset].to_s, result_hash['offset'], filter_string
     assert_equal @filter_hash[:query].to_s, result_hash['query'], filter_string
   end
-  
+
   def test_release_types_as_array
     filter = Webservice::ReleaseFilter.new(:releasetypes => [Model::Release::TYPE_ALBUM, 'Official'])
     filter_string = filter.to_s
     assert_not_equal '&', filter_string[0]
-    
+
     result_hash = query_string_to_hash filter_string
     assert_equal 'Album Official', result_hash['releasetypes'], filter_string
   end
-  
+
   def test_empty_filter
     filter = Webservice::ReleaseFilter.new({})
     assert_equal 'cdstubs=no', filter.to_s
   end
-  
+
   def test_include_cdstubs
     filter = Webservice::ReleaseFilter.new({ :cdstubs => true })
     assert_equal 'cdstubs=yes', filter.to_s
   end
-  
+
   def test_exclude_cdstubs
     filter = Webservice::ReleaseFilter.new({ :cdstubs => false })
     assert_equal 'cdstubs=no', filter.to_s
   end
-  
+
 end

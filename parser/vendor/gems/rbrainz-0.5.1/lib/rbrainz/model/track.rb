@@ -16,35 +16,35 @@ module MusicBrainz
   module Model
 
     # A track in the MusicBrainz DB.
-    # 
+    #
     # See:: http://musicbrainz.org/doc/Track.
     class Track < Entity
-    
+
       include Rateable
       include Relateable
       include Taggable
-      
+
       # See Entity::ENTITY_TYPE.
       ENTITY_TYPE = :track # :nodoc:
-      
+
       # The track's title.
       attr_accessor :title
-      
+
       # The duration in milliseconds.
       attr_accessor :duration
-      
+
       # The track's main artist.
       attr_accessor :artist
-      
-      # The list of associated PUIDs.           
+
+      # The list of associated PUIDs.
       attr_reader :puids
-      
-      # The list of associated ISRCs.           
+
+      # The list of associated ISRCs.
       attr_reader :isrcs
-      
+
       # The releases on which this track appears.
       attr_reader :releases
-      
+
       def initialize(id=nil, title=nil)
         super id
         self.title = title
@@ -52,14 +52,14 @@ module MusicBrainz
         @isrcs     = Collection.new
         @releases  = Collection.new
       end
-      
+
       # Returns the string representation for this track.
-      # 
+      #
       # Returns #title converted into a string.
       def to_s
         title.to_s
       end
-      
+
     end
 
   end

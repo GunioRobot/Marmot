@@ -22,7 +22,7 @@ class TestQuery < Test::Unit::TestCase
 
   def teardown
   end
-  
+
   def test_get_artist_with_includes
     id = 'c0b2500e-0cef-4130-869d-732b23ed9df5'
     includes = Webservice::ArtistIncludes.new(:aliases => true)
@@ -31,7 +31,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'Tori Amos', entity.name
   end
-  
+
   def test_get_artist_without_includes
     id = 'c0b2500e-0cef-4130-869d-732b23ed9df5'
     entity = @query.get_artist_by_id(id)
@@ -39,7 +39,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'Tori Amos', entity.name
   end
-  
+
   def test_get_artists
     filter = Webservice::ArtistFilter.new(:name=>'Tori Amos')
     collection = @query.get_artists(filter)
@@ -47,7 +47,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal 3, collection.size
     collection.entities.each {|e| assert e.is_a?(Model::Artist) }
   end
-  
+
   def test_get_release_group_with_includes
     id = 'c6a62b78-70f7-44f7-b159-064f6b7ba03a'
     includes = Webservice::ReleaseGroupIncludes.new(:artist => true)
@@ -56,7 +56,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'The Cure', entity.title
   end
-  
+
   def test_get_release_group_without_includes
     id = 'c6a62b78-70f7-44f7-b159-064f6b7ba03a'
     entity = @query.get_release_group_by_id(id)
@@ -64,7 +64,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'The Cure', entity.title
   end
-  
+
   # TODO: Enable this test once there is a proper test file.
   #def test_get_release_groups
   #  filter = Webservice::ReleaseGroupFilter.new(:title=>'The Cure')
@@ -73,7 +73,7 @@ class TestQuery < Test::Unit::TestCase
   #  assert_equal 2, collection.size
   #  collection.entities.each {|e| assert e.is_a?(Model::ReleaseGroup) }
   #end
-  
+
   def test_get_release_with_includes
     id = '290e10c5-7efc-4f60-ba2c-0dfc0208fbf5'
     includes = Webservice::ReleaseIncludes.new(:artist => true)
@@ -82,7 +82,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'Under the Pink', entity.title
   end
-  
+
   def test_get_release_without_includes
     id = '290e10c5-7efc-4f60-ba2c-0dfc0208fbf5'
     entity = @query.get_release_by_id(id)
@@ -90,7 +90,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'Under the Pink', entity.title
   end
-  
+
   def test_get_releases
     filter = Webservice::ReleaseFilter.new(:title=>'Under the Pink')
     collection = @query.get_releases(filter)
@@ -98,7 +98,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal 2, collection.size
     collection.entities.each {|e| assert e.is_a?(Model::Release) }
   end
-  
+
   def test_get_track_with_includes
     id = 'd6118046-407d-4e06-a1ba-49c399a4c42f'
     includes = Webservice::TrackIncludes.new(:releases => true)
@@ -115,7 +115,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'Silent All These Years', entity.title
   end
-  
+
   def test_get_tracks
     filter = Webservice::TrackFilter.new(:title=>'Little Earthquakes')
     collection = @query.get_tracks(filter)
@@ -123,7 +123,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal 3, collection.size
     collection.entities.each {|e| assert e.is_a?(Model::Track) }
   end
-  
+
   def test_get_label_with_includes
     id = '50c384a2-0b44-401b-b893-8181173339c7'
     includes = Webservice::LabelIncludes.new(:aliases => true)
@@ -140,7 +140,7 @@ class TestQuery < Test::Unit::TestCase
     assert_equal id, entity.id.uuid
     assert_equal 'Atlantic Records', entity.name
   end
-  
+
   def test_get_labels
     filter = Webservice::LabelFilter.new(:name=>'Atlantic Records')
     collection = @query.get_labels(filter)
@@ -148,25 +148,25 @@ class TestQuery < Test::Unit::TestCase
     assert_equal 2, collection.size
     collection.entities.each {|e| assert e.is_a?(Model::Label) }
   end
-  
+
   def test_get_user_by_name
     user = @query.get_user_by_name('matt')
     assert user.is_a?(Model::User)
     assert_equal false, user.show_nag?
   end
-  
+
   def test_factory
     factory = MyFactory.new
     query = Webservice::Query.new(@webservice, :factory=>factory)
-    
+
     id = '290e10c5-7efc-4f60-ba2c-0dfc0208fbf5'
     entity = query.get_release_by_id(id)
     assert entity.is_a?(MyRelease)
   end
-  
+
   def test_response_error
     assert_raise(Webservice::ResponseError){@query.get_artist_by_id('00000000-0000-0000-0000-000000000000')}
     assert_raise(Webservice::ResponseError){@query.get_artist_by_id('11111111-1111-1111-1111-111111111111')}
   end
-  
+
 end
